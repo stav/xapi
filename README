@@ -1,1 +1,4 @@
-pnpx tsc
+$ pnpm tsc && node dist/index.js
+
+Connection is ready
+Disconnected

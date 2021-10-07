@@ -1,15 +1,59 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@types/node': ^16.10.3
+  dotenv: ^10.0.0
   typescript: ^4.4.3
+  xapi-node: ^2.5.4
+
+dependencies:
+  dotenv: 10.0.0
+  xapi-node: 2.5.4
 
 devDependencies:
+  '@types/node': 16.10.3
   typescript: 4.4.3
 
 packages:
+
+  /@types/node/16.10.3:
+    resolution: {integrity: sha512-ho3Ruq+fFnBrZhUYI46n/bV2GjwzSkwuT4dTf0GkuNFmnb8nq4ny2z9JEVemFi6bdEJanHLlYfy9c6FN9B9McQ==}
+    dev: true
+
+  /dotenv/10.0.0:
+    resolution: {integrity: sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==}
+    engines: {node: '>=10'}
+    dev: false
+
+  /logger4/2.1.5:
+    resolution: {integrity: sha512-FEdEKqhiDGoEY7Wqxo8q2sa+VZqHDIcY2qIw6NBfxdnQVinM3kc/VrFaalp9uLqd1iqwTC6Xgw9VEExmn1LSAA==}
+    dev: false
 
   /typescript/4.4.3:
     resolution: {integrity: sha512-4xfscpisVgqqDfPaJo5vkd+Qd/ItkoagnHpufr+i2QCHBsNYp+G7UAoyFl8aPtx879u38wPV65rZ8qbGZijalA==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
+
+  /ws/7.5.5:
+    resolution: {integrity: sha512-BAkMFcAzl8as1G/hArkxOxq3G7pjUqQ3gzYbLL0/5zNkph70e+lCoxBGnm6AW1+/aiNeV4fnKqZ8m4GZewmH2w==}
+    engines: {node: '>=8.3.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+    dev: false
+
+  /xapi-node/2.5.4:
+    resolution: {integrity: sha512-U/r30iws5LdHpPCpcwePqsaOYQ5fz0NcGdMYa+Yq2kuJJBVarrY6VUIgL7s9yRhiFtb4iMidTPFxdChh1wBuUA==}
+    dependencies:
+      logger4: 2.1.5
+      ws: 7.5.5
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+    dev: false
