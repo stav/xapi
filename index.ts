@@ -7,17 +7,17 @@ dotenv.config();
 // console.log(nodeEnv);
 
 const xapi = new XAPI({
-    accountId: process.env.ACCOUNTID || '',
-    password: process.env.PASSWORD || '',
-    type: 'demo'
+  accountId: process.env.ACCOUNTID || '',
+  password: process.env.PASSWORD || '',
+  type: 'demo'
 })
 
 xapi.connect()
+xapi.onReady(ready)
+xapi.onReject(console.error)
 
-xapi.onReady(() => {
-    console.log('Connection is ready')
-    xapi.disconnect().then(() => console.log('Disconnected'))
-})
-xapi.onReject((e) => {
-    console.error(e)
-})
+async function ready() {
+  console.log('Connection is ready')
+  await xapi.disconnect()
+  console.log('Disconnected')
+}
