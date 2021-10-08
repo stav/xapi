@@ -38,7 +38,7 @@ export default async function (xapi: XAPI) {
   console.log('main')
   // const result = await buySellGold(xapi)
   // const result = await writeAllSymbols(xapi)
-  const result = await updateStoploss(xapi)
-  console.log('Result', result)
+  // const result = await updateStoploss(xapi)
+  // console.log('Result', result)
 
 }
