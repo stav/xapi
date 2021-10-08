@@ -1,12 +1,12 @@
 {
-  "name": "xtb",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "xapi",
+  "version": "0.0.0",
+  "description": "Trading robot for XTB",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Steven Almeroth steve@primesite.dev",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^16.10.3",
