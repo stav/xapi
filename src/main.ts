@@ -1,21 +1,31 @@
 import fs from 'fs'
 import XAPI from 'xapi-node'
 import { CMD_FIELD, TYPE_FIELD } from 'xapi-node'
+import config from 'config'
+
+const Orders = function* orderGenerator() {
+  const tip: any = config.get('Tip.XAUUSD')
+  for (const tp of tip.tp as number[]) {
+    yield {
+      cmd: tip.type === 'SELL' ? CMD_FIELD.SELL_LIMIT : CMD_FIELD.BUY_LIMIT,
+      customComment: null,
+      expiration: new Date().getTime() + 60000 * 60 * 24 * 365,
+      offset: 0,
+      order: 0,
+      price: tip.entry,
+      sl: tip.sl,
+      symbol: 'GOLD',
+      tp: tp,
+      type: TYPE_FIELD.OPEN,
+      volume: 10,
+    }
+  }
+}()
 
 async function buySellGold(xapi: XAPI) {
-  return await xapi.Socket.send.tradeTransaction({
-    cmd: CMD_FIELD.SELL_LIMIT,
-    customComment: null,
-    expiration: new Date().getTime() + 60000 * 60 * 24 * 365,
-    offset: 0,
-    order: 0,
-    price: 1765,
-    sl: 1775,
-    symbol: 'GOLD',
-    tp: 1763,
-    type: TYPE_FIELD.OPEN,
-    volume: 10,
-  })
+  for (const order of Array.from(Orders)) {
+    await xapi.Socket.send.tradeTransaction(order)
+  }
 }
 
 async function writeAllSymbols(xapi: XAPI) {

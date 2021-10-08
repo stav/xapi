@@ -1,32 +1,72 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@types/config': ^0.0.39
   '@types/node': ^16.10.3
+  config: ^3.3.6
   dotenv: ^10.0.0
+  js-yaml: ^4.1.0
   typescript: ^4.4.3
   xapi-node: ^2.5.4
 
 dependencies:
+  config: 3.3.6
   dotenv: 10.0.0
+  js-yaml: 4.1.0
   xapi-node: 2.5.4
 
 devDependencies:
+  '@types/config': 0.0.39
   '@types/node': 16.10.3
   typescript: 4.4.3
 
 packages:
 
+  /@types/config/0.0.39:
+    resolution: {integrity: sha512-EBHj9lSIyw62vwqCwkeJXjiV6C2m2o+RJZlRWLkHduGYiNBoMXcY6AhSLqjQQ+uPdrPYrOMYvVa41zjo00LbFQ==}
+    dev: true
+
   /@types/node/16.10.3:
     resolution: {integrity: sha512-ho3Ruq+fFnBrZhUYI46n/bV2GjwzSkwuT4dTf0GkuNFmnb8nq4ny2z9JEVemFi6bdEJanHLlYfy9c6FN9B9McQ==}
     dev: true
+
+  /argparse/2.0.1:
+    resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
+    dev: false
+
+  /config/3.3.6:
+    resolution: {integrity: sha512-Hj5916C5HFawjYJat1epbyY2PlAgLpBtDUlr0MxGLgo3p5+7kylyvnRY18PqJHgnNWXcdd0eWDemT7eYWuFgwg==}
+    engines: {node: '>= 10.0.0'}
+    dependencies:
+      json5: 2.2.0
+    dev: false
 
   /dotenv/10.0.0:
     resolution: {integrity: sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==}
     engines: {node: '>=10'}
     dev: false
 
+  /js-yaml/4.1.0:
+    resolution: {integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==}
+    hasBin: true
+    dependencies:
+      argparse: 2.0.1
+    dev: false
+
+  /json5/2.2.0:
+    resolution: {integrity: sha512-f+8cldu7X/y7RAJurMEJmdoKXGB/X550w2Nr3tTbezL6RwEE/iMcm+tZnXeoZtKuOq6ft8+CqzEkrIgx1fPoQA==}
+    engines: {node: '>=6'}
+    hasBin: true
+    dependencies:
+      minimist: 1.2.5
+    dev: false
+
   /logger4/2.1.5:
     resolution: {integrity: sha512-FEdEKqhiDGoEY7Wqxo8q2sa+VZqHDIcY2qIw6NBfxdnQVinM3kc/VrFaalp9uLqd1iqwTC6Xgw9VEExmn1LSAA==}
+    dev: false
+
+  /minimist/1.2.5:
+    resolution: {integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==}
     dev: false
 
   /typescript/4.4.3:

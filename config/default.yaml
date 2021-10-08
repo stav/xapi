@@ -1,0 +1,6 @@
+Tip:
+  XAUUSD:
+    type: SELL
+    entry: 1765
+    sl: 1775
+    tp: [1763, 1761, 1758, 1755, 1750]
