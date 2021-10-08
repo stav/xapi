@@ -1,3 +1,4 @@
+import fs from 'fs'
 import XAPI from 'xapi-node'
 import { CMD_FIELD, TYPE_FIELD } from 'xapi-node'
 
@@ -17,10 +18,18 @@ async function buyGold(xapi: XAPI) {
   })
 }
 
+async function writeAllSymbols(xapi: XAPI) {
+  const result = await xapi.Socket.send.getAllSymbols()
+  // Result [ 'returnData', 'time', 'json', 'transaction' ]
+  fs.writeFile('symbols.json', result.json, console.error)
+  return `${result.returnData.length} symbols written`
+}
+
 export default async function (xapi: XAPI) {
 
   console.log('main')
-  const result = await buyGold(xapi)
+  // const result = await buyGold(xapi)
+  const result = await writeAllSymbols(xapi)
   console.log('Result', result)
 
 }
