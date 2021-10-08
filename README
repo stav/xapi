@@ -1,4 +1,4 @@
-$ pnpm tsc && node dist/index.js
+$ pnpm tsc && node dist/src/index.js
 
 Connection is ready
 main
