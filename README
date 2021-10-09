@@ -1,7 +1,0 @@
-$ pnpm tsc && node dist/src/index.js
-
-Connection is ready
-main
-Disconnected
-
-works with live (demo) socket at https://xs5.xopenhub.pro/xoh/#/demo/loggedIn
