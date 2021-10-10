@@ -1,14 +1,25 @@
 import XAPI from 'xapi-node'
+import { STREAMING_TRADE_RECORD as streamingTradeRecord } from 'xapi-node'
+import { STREAMING_TRADE_STATUS_RECORD as streamingTradeStatusRecord } from 'xapi-node'
 import { buySellGold, updateStoploss, writeAllSymbols } from './api'
 
 const ctrlC = '\u0003'
 const ctrlD = '\u0004'
+
+function getTrades (data: streamingTradeRecord) {
+  console.log('getTrades', data)
+}
+
+function getTradeStatus (data: streamingTradeStatusRecord) {
+  console.log('getTradeStatus', data)
+}
 
 export default async function (xapi: XAPI) {
   const stdin = process.stdin
   stdin.setEncoding('utf8')
   stdin.setRawMode(true) // false sends chunk after enter is pressed
   await stdin.resume() // running in parent process event loop
+
   await stdin.on('data', async function ( data: Buffer ) {
     process.stdout.write(JSON.stringify(data) + '\n')
     const key = data.toString()
@@ -19,17 +30,29 @@ export default async function (xapi: XAPI) {
       process.exit();
     }
     else if ( key === '1' ) {
-      console.log('Lising')
+      console.log('Trades')
+      // xapi.Stream.subscribe.getBalance().catch(console.error)
+      xapi.Stream.listen.getTrades(getTrades)
+      xapi.Stream.listen.getTradeStatus(getTradeStatus)
+      xapi.Stream.subscribe.getTrades().catch(console.error)
+      xapi.Stream.subscribe.getTradeStatus().catch(console.error)
     }
     else if ( key === '2' ) {
+      console.log('UNListing')
+      // xapi.Stream.unSubscribe.getBalance().catch(console.error)
+      // xapi.Stream.subscribe.getTickPrices('EURUSD').catch(() => { console.error('subscribe for EURUSD failed')})
+      xapi.Stream.unSubscribe.getTrades().catch(console.error)
+      xapi.Stream.unSubscribe.getTradeStatus().catch(console.error)
+    }
+    else if ( key === '3' ) {
       console.log('Buy or sell gold')
       await buySellGold(xapi)
     }
-    else if ( key === '3' ) {
+    else if ( key === '4' ) {
       console.log('Write all symbols')
       await writeAllSymbols(xapi)
     }
-    else if ( key === '4' ) {
+    else if ( key === '5' ) {
       console.log('Update stop loss')
       await updateStoploss(xapi)
     }

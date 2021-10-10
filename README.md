@@ -2,7 +2,15 @@
 $ pnpm tsc && node dist/src/index.js
 
 Connection is ready
-main
+"1"
+Trades
+getTradeStatus {
+  order: 309308069,
+  requestStatus: 3,
+  message: null,
+  customComment: 'x163382481507600320'
+}
+"\u0004"
 Disconnected
 ```
 
