@@ -1,17 +1,15 @@
 ```
 $ pnpm tsc && node dist/src/index.js
 
-Connection is ready
-"1"
-Trades
+Socket is: CONNECTED
+"1" Trades
 getTradeStatus {
   order: 309308069,
   requestStatus: 3,
   message: null,
   customComment: 'x163382481507600320'
 }
-"\u0004"
-Disconnected
+"\u0004" disconnecting... DISCONNECTED
 ```
 
 works with live (demo) socket at https://xs5.xopenhub.pro/xoh/#/demo/loggedIn

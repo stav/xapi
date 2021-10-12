@@ -1,7 +1,8 @@
 import fs from 'fs'
+import config from 'config'
+
 import XAPI from 'xapi-node'
 import { CMD_FIELD, TYPE_FIELD } from 'xapi-node'
-import config from 'config'
 
 const orders = function () {
   const tip: any = config.get('Tip.XAUUSD')

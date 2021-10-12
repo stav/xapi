@@ -1,8 +1,8 @@
-import XAPI from 'xapi-node'
 import dotenv from 'dotenv'
+import XAPI from 'xapi-node'
 import main from './main'
 
-dotenv.config();
+dotenv.config(); // loads .env into process.env
 
 const xapi = new XAPI({
   accountId: process.env.ACCOUNTID || '',
@@ -10,12 +10,6 @@ const xapi = new XAPI({
   host: 'ws.xtb.com', // only for XTB accounts
   type: 'demo',
 })
-
 xapi.connect()
-xapi.onReady(ready)
+xapi.onReady(() => main(xapi))
 xapi.onReject(console.error)
-
-async function ready() {
-  console.log('Connection is ready')
-  await main(xapi)
-}

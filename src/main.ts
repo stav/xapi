@@ -1,6 +1,8 @@
 import XAPI from 'xapi-node'
+import { ConnectionStatus } from 'xapi-node'
 import { STREAMING_TRADE_RECORD as streamingTradeRecord } from 'xapi-node'
 import { STREAMING_TRADE_STATUS_RECORD as streamingTradeStatusRecord } from 'xapi-node'
+
 import { buySellGold, updateStoploss, writeAllSymbols } from './api'
 
 const ctrlC = '\u0003'
@@ -15,18 +17,22 @@ function getTradeStatus (data: streamingTradeStatusRecord) {
 }
 
 export default async function (xapi: XAPI) {
+  console.log('Socket is:', ConnectionStatus[xapi.Socket.status])
+
   const stdin = process.stdin
   stdin.setEncoding('utf8')
   stdin.setRawMode(true) // false sends chunk after enter is pressed
   await stdin.resume() // running in parent process event loop
 
   await stdin.on('data', async function ( data: Buffer ) {
-    process.stdout.write(JSON.stringify(data) + '\n')
+    // xapi is being hoisted from (main) the outer function
+    process.stdout.write(JSON.stringify(data) + ' ')
     const key = data.toString()
 
     if ( key === ctrlC || key === ctrlD ) {
+      process.stdout.write('disconnecting... ')
       await xapi.disconnect()
-      console.log('Disconnected')
+      process.stdout.write(`${ConnectionStatus[xapi.Socket.status]}\n`)
       process.exit();
     }
     else if ( key === '1' ) {
@@ -55,6 +61,9 @@ export default async function (xapi: XAPI) {
     else if ( key === '5' ) {
       console.log('Update stop loss')
       await updateStoploss(xapi)
+    }
+    else {
+      process.stdout.write('does nothing\n')
     }
 
   })
