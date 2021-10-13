@@ -1,5 +1,5 @@
 import XAPI from 'xapi-node'
-import { ConnectionStatus } from 'xapi-node'
+import { socketStatus } from './utils'
 
 import {
   disconnect,
@@ -19,7 +19,7 @@ type KeyMap = {
 }
 
 export default async function (xapi: XAPI) {
-  console.log('Socket is:', ConnectionStatus[xapi.Socket.status])
+  console.log('Socket is:', socketStatus(xapi))
 
   const keyMap = {
     [ctrlC]: disconnect,

@@ -5,10 +5,11 @@ import XAPI from 'xapi-node'
 import {
   CMD_FIELD,
   TYPE_FIELD,
-  ConnectionStatus,
   STREAMING_TRADE_RECORD as streamingTradeRecord,
   STREAMING_TRADE_STATUS_RECORD as streamingTradeStatusRecord,
 } from 'xapi-node'
+
+import { socketStatus } from './utils'
 
 function getTrades (data: streamingTradeRecord) {
   console.log('getTrades', data)
@@ -38,7 +39,8 @@ const orders = function () {
 export async function disconnect (xapi: XAPI) {
   process.stdout.write('disconnecting... ')
   await xapi.disconnect()
-  process.stdout.write(`${ConnectionStatus[xapi.Socket.status]}\n`)
+  process.stdout.write(socketStatus(xapi))
+  process.stdout.write('\n')
   process.exit();
 }
 
@@ -64,17 +66,18 @@ export async function updateStoploss(xapi: XAPI) {
 }
 
 export async function listenForTrades(xapi: XAPI) {
+  console.log('Listening for trades')
   // xapi.Stream.subscribe.getBalance().catch(console.error)
   xapi.Stream.listen.getTrades(getTrades)
-  xapi.Stream.listen.getTradeStatus(getTradeStatus)
   xapi.Stream.subscribe.getTrades().catch(console.error)
-  xapi.Stream.subscribe.getTradeStatus().catch(console.error)
+  // xapi.Stream.listen.getTradeStatus(getTradeStatus)
+  // xapi.Stream.subscribe.getTradeStatus().catch(console.error)
 }
 
 export async function unListenForTrades(xapi: XAPI) {
-  console.log('UNListing')
+  console.log('No longer listening for trades')
   // xapi.Stream.unSubscribe.getBalance().catch(console.error)
   // xapi.Stream.subscribe.getTickPrices('EURUSD').catch(() => { console.error('subscribe for EURUSD failed')})
   xapi.Stream.unSubscribe.getTrades().catch(console.error)
-  xapi.Stream.unSubscribe.getTradeStatus().catch(console.error)
+  // xapi.Stream.unSubscribe.getTradeStatus().catch(console.error)
 }
