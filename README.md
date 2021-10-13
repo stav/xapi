@@ -2,13 +2,24 @@
 $ pnpm tsc && node dist/src/index.js
 
 Socket is: CONNECTED
-"1" Trades
-getTradeStatus {
-  order: 309308069,
-  requestStatus: 3,
-  message: null,
-  customComment: 'x163382481507600320'
-}
+"1" Listening for trades
+{"cmd":3,"order":311313788,"digits":2,"offset":0,"order2":311313788,"position":
+311313788,"symbol":"GOLD","comment":"","customComment":"x163456025517000050_K1NGbot",
+"commission":0,"storage":0,"margin_rate":0,"close_price":0,"open_price":1765,
+"nominalValue":0,"profit":null,"volume":10,"sl":1775,"tp":1763,"closed":false,
+"type":1,"open_time":1634560255319,"close_time":null,"expiration":1666096249983,
+"state":"Modified"}
+
+"6" does nothing
+"1" listenForTrades
+"2" unListenForTrades
+"3" buySellGold
+"4" writeAllSymbols
+"5" updateStoploss
+"\u0003" disconnect
+"\u0004" disconnect
+
+"2" No longer listening for trades
 "\u0004" disconnecting... DISCONNECTED
 ```
 

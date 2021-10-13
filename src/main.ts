@@ -12,13 +12,20 @@ import {
 
 const ctrlC = '\u0003'
 const ctrlD = '\u0004'
+const carriage = ['\n', '\r', '\r\n']
 
 type KeyMap = {
   "\u0003": (xapi: XAPI) => Promise<void>
   "\u0004": (xapi: XAPI) => Promise<void>
 }
 
-export default async function (xapi: XAPI) {
+function setupStdin () {
+  process.stdin.setEncoding('utf8')
+  process.stdin.setRawMode(true) // false sends chunk after enter is pressed
+  process.stdin.resume() // running in parent process event loop
+}
+
+export default function (xapi: XAPI) {
   console.log('Socket is:', socketStatus(xapi))
 
   const keyMap = {
@@ -31,21 +38,27 @@ export default async function (xapi: XAPI) {
     5: updateStoploss,
   }
 
-  const stdin = process.stdin
-  stdin.setEncoding('utf8')
-  stdin.setRawMode(true) // false sends chunk after enter is pressed
-  await stdin.resume() // running in parent process event loop
+  setupStdin()
 
-  await stdin.on('data', async function ( data: Buffer ) {
-    // xapi is being hoisted from (main) the outer function
-    process.stdout.write(JSON.stringify(data) + ' ')
-    const key = data.toString()
+  process.stdin.on('data', async function ( data: Buffer ) {
+    process.stdout.write('\n' + JSON.stringify(data) + ' ')
 
-    if ( key in keyMap ) {
-      await keyMap[key as keyof KeyMap](xapi)
+    const key = data.toString() as keyof KeyMap
+
+    if (key in keyMap) {
+      // xapi is being hoisted from the outer function
+      await keyMap[ key ]( xapi )
+    }
+    else if (carriage.includes(key)) {
+      process.stdout.write('\n')
     }
     else {
       process.stdout.write('does nothing\n')
+      for (const key in keyMap) {
+        process.stdout.write(JSON.stringify(key) + ' ')
+        const func = keyMap[key as keyof KeyMap]
+        process.stdout.write(func.name + '\n')
+      }
     }
 
   })

@@ -12,21 +12,15 @@ import {
 import { socketStatus } from './utils'
 
 function getTrades (data: streamingTradeRecord) {
-  console.log('getTrades', data)
-}
-
-function getTradeStatus (data: streamingTradeStatusRecord) {
-  console.log('getTradeStatus', data)
+  console.log(JSON.stringify(data))
 }
 
 const orders = function () {
   const tip: any = config.get('Tip.XAUUSD')
   return tip.tp.map((tp: any) => ({
     cmd: tip.type === 'SELL' ? CMD_FIELD.SELL_LIMIT : CMD_FIELD.BUY_LIMIT,
-    customComment: null,
+    customComment: 'K1NGbot',
     expiration: new Date().getTime() + 60000 * 60 * 24 * 365,
-    offset: 0,
-    order: 0,
     price: tip.entry,
     sl: tip.sl,
     symbol: 'GOLD',
@@ -45,8 +39,14 @@ export async function disconnect (xapi: XAPI) {
 }
 
 export async function buySellGold(xapi: XAPI) {
+  console.log('Buying or selling gold')
   for (const order of orders) {
-    await xapi.Socket.send.tradeTransaction(order)
+    try {
+      await xapi.Socket.send.tradeTransaction(order)
+    }
+    catch (e: any) {
+      console.error(`Nope, order ${e.order} ${e.message}`)
+    }
   }
 }
 
@@ -70,8 +70,6 @@ export async function listenForTrades(xapi: XAPI) {
   // xapi.Stream.subscribe.getBalance().catch(console.error)
   xapi.Stream.listen.getTrades(getTrades)
   xapi.Stream.subscribe.getTrades().catch(console.error)
-  // xapi.Stream.listen.getTradeStatus(getTradeStatus)
-  // xapi.Stream.subscribe.getTradeStatus().catch(console.error)
 }
 
 export async function unListenForTrades(xapi: XAPI) {
@@ -79,5 +77,4 @@ export async function unListenForTrades(xapi: XAPI) {
   // xapi.Stream.unSubscribe.getBalance().catch(console.error)
   // xapi.Stream.subscribe.getTickPrices('EURUSD').catch(() => { console.error('subscribe for EURUSD failed')})
   xapi.Stream.unSubscribe.getTrades().catch(console.error)
-  // xapi.Stream.unSubscribe.getTradeStatus().catch(console.error)
 }
