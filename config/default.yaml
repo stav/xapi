@@ -1,6 +1,7 @@
 Tip:
-  XAUUSD:
-    type: SELL
-    entry: 1765
-    sl: 1775
-    tp: [1763, 1761, 1758, 1755, 1750]
+  symbol: GOLD
+  type: BUY
+  entry: 1766
+  sl: 1754
+  tp: [1767, 1768, 1771, 1774, 1779]
+  volume: 10
