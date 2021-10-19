@@ -21,7 +21,7 @@ function getOrders () {
     order: 0,
     offset: 0,
     symbol: tip.symbol,
-    cmd: tip.type === 'SELL' ? CMD_FIELD.SELL_LIMIT : CMD_FIELD.BUY_LIMIT,
+    cmd: tip.type === 'SELL' ? CMD_FIELD.SELL_STOP : CMD_FIELD.BUY_STOP,
     price: tip.entry,
     sl: tip.sl,
     tp: tp,
