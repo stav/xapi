@@ -1,7 +1,52 @@
 Tip:
+  symbol: BITCOIN
+  type: BUY
+  entry: 60488
+  sl: 58000
+  tp: [62000]
+  volume: 1
+
+2021-10-25:
+  symbol: GOLD
+  type: SELL
+  entry: 1801.20
+  sl: 1810.20
+  tp: [1798.20, 1795.20, 1791.20, 1785.20]
+  volume: 10
+
+2021-10-22:
+  symbol: GOLD
+  type: BUY
+  entry: 1791.50
+  sl: 1784.50
+  tp: [1793.50, 1796.50, 1801.50, 1805.50, 1810.50]
+  volume: 10
+
+2021-10-20:
+  symbol: GOLD
+  type: SELL
+  entry: 1792
+  sl: 1802
+  tp: [1790, 1788, 1785, 1782, 1777]
+  volume: 10
+
+2021-10-19:
   symbol: GOLD
   type: BUY
   entry: 1779
   sl: 1769
   tp: [1781, 1783, 1786, 1789, 1794]
   volume: 10
+
+Bitcoin:
+  symbol: BITCOIN
+  type: BUY
+  entry: 65200
+  sl: 63800
+  tp: [65300, 65400, 65500]
+  volume: 1
+
+Update:
+  type: 3
+  entry: 60222
+  price: 60260

@@ -7,6 +7,10 @@ It can listen for when trade events take place via a websocket connection.
 Once the bot is listening for trades it will spot orders closed because of take
 profit which will signal the bot to adjust the stop loss for all remaining orders.
 
+### Documentation
+
+http://developers.xstore.pro/documentation/
+
 ## Installation
 
 	git clone git@github.com:stav/xapi.git
@@ -19,21 +23,33 @@ profit which will signal the bot to adjust the stop loss for all remaining order
 
 	Socket is: CONNECTED
 	"1" Listening for trades
-	{"cmd":3,"order":311313788,"digits":2,"offset":0,"order2":311313788,"position":
-	311313788,"symbol":"GOLD","comment":"","customComment":"x163456025517000050_K1NGbot",
-	"commission":0,"storage":0,"margin_rate":0,"close_price":0,"open_price":1765,
-	"nominalValue":0,"profit":null,"volume":10,"sl":1775,"tp":1763,"closed":false,
-	"type":1,"open_time":1634560255319,"close_time":null,"expiration":1666096249983,
-	"state":"Modified"}
+	*. Order 313400349 313384466 313400349 SELL BITCOIN @ 61992.25 SL 62700 TP 61937.48 profit=-109.82 (Modified) 
 
-	"6" does nothing
-	"1" listenForTrades
-	"2" unListenForTrades
-	"3" buySellGold
-	"4" writeAllSymbols
-	"5" updateStoploss
-	"\u0003" disconnect
-	"\u0004" disconnect
+	"5" updateTrades 60300
+	1. Order 312609755 312609755 312609755 SELL_STOP BITCOIN @ 60300 sl=60500 
+	2. Order 312609756 312609756 312609756 SELL_STOP BITCOIN @ 60300 sl=60500 
+	3. Order 312609757 312609757 312609757 SELL_STOP BITCOIN @ 60300 sl=60500 
+	Updated 3 trades with entry 60300 to new stop loss 60666
+	1. Order 312609755 312609755 312609755 SELL_STOP BITCOIN @ 60300 sl=60666 
+	2. Order 312609756 312609756 312609756 SELL_STOP BITCOIN @ 60300 sl=60666 
+	3. Order 312609757 312609757 312609757 SELL_STOP BITCOIN @ 60300 sl=60666 
+
+	"6" Printing positions
+	1. Order 313400349 313384466 313400349 SELL BITCOIN @ 61992.25 SL 62700 TP 61937.48 profit=-163.4 
+	2. Order 313402992 313401742 313402992 BUY BITCOIN @ 62200.81 SL 61000 TP 63200 profit=-192.87 "x163527755480500470"
+	3. Order 313400348 313384467 313400348 SELL BITCOIN @ 61992.25 SL 62700 TP 61748.31 profit=-163.4 
+	4. Order 313402994 313401744 313402994 BUY BITCOIN @ 62200.81 SL 61000 TP 63300 profit=-192.87 "x163527755504800480"
+	5. Order 313402993 313401741 313402993 BUY BITCOIN @ 62200.81 SL 61000 TP 62286.86 profit=-192.87 
+
+	"?" does nothing
+	"1" Listen
+	"2" UnListen
+	"3" Trade
+	"4" Symbols
+	"5" Update
+	"6" Positions
+	"\u0003" Disconnect
+	"\u0004" Disconnect
 
 	"2" No longer listening for trades
 	"\u0004" disconnecting... DISCONNECTED
