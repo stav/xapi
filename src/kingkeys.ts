@@ -19,9 +19,9 @@ export default class KeyedApiRobot extends StreamingApiRobot {
            1 : function Listen    () { this.listenForTrades  () },
            2 : function UnListen  () { this.unListenForTrades() },
            3 : function Trade     () { this.buySellGold      () },
-           4 : function Symbols   () { this.writeAllSymbols  () },
            5 : function Update    () { this.updateTrades     () },
            6 : function Positions () { this.printPositions   () },
+           9 : function Symbols   () { this.writeAllSymbols  () },
     }
   }
 

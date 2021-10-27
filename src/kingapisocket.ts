@@ -1,53 +1,19 @@
-import fs from 'fs'
 import config from 'config'
 
-import {
-  CMD_FIELD,
-  TYPE_FIELD,
-} from 'xapi-node'
-
+import getOrders from './orders'
 import XapiRobot from './xapirobot'
-
-function getOrders () {
-  const timestamp: number = Date.now()
-  const tip: any = config.util.loadFileConfigs().Tip
-  return tip.tp.map((tp: any) => ({
-    order: 0,
-    offset: 0,
-    symbol: tip.symbol,
-    cmd: tip.type === 'SELL' ? CMD_FIELD.SELL_STOP : CMD_FIELD.BUY_STOP,
-    price: tip.entry,
-    sl: tip.sl,
-    tp: tp,
-    type: TYPE_FIELD.OPEN,
-    volume: tip.volume,
-    expiration: new Date().getTime() + 60000 * 60 * 24 * 365,
-    customComment: 'K1NGbot ' + timestamp,
-  }))
-}
+import { printTrades } from './trades'
+import { writeAllSymbols } from './symbols'
 
 export default class SocketApiRobot extends XapiRobot {
 
+  protected printTrades: Function
+  protected writeAllSymbols: Function
+
   constructor() {
     super()
-  }
-
-  protected printTrades(trades: any[]) {
-    for (let i=0; i<trades.length; i++) {
-      const trade = trades[i]
-      const type = CMD_FIELD[trade.cmd]
-      console.info(
-        trades.length > 1 ? `${i+1}.` : '*.',
-        'Order', trade.order, trade.order2, trade.position,
-        type, trade.symbol,
-        '@', trade.open_price,
-        'SL', trade.sl,
-        'TP', trade.tp,
-        trade.profit ? `profit=${trade.profit}` : '\b',
-        trade.state ? `(${trade.state})` : '\b',
-        trade.customComment ? `"${trade.customComment}"` : '\b',
-      )
-    }
+    this.printTrades = printTrades
+    this.writeAllSymbols = () => writeAllSymbols(this.xapi)
   }
 
   async buySellGold() {
@@ -55,6 +21,7 @@ export default class SocketApiRobot extends XapiRobot {
     const orders = getOrders()
     console.info(orders.length, 'orders to be created')
     for (const order of orders) {
+      console.info(order)
       try {
         await this.xapi.Socket.send.tradeTransaction(order)
       }
@@ -63,13 +30,6 @@ export default class SocketApiRobot extends XapiRobot {
       }
       this.log(order)
     }
-  }
-
-  async writeAllSymbols() {
-    const result: any = await this.xapi.Socket.send.getAllSymbols()
-    // Result [ 'returnData', 'time', 'json', 'transaction' ]
-    fs.writeFile('symbols.json', result.json, console.error)
-    console.info(`${result.returnData.length} symbols written`)
   }
 
   async updateTrades() {
