@@ -14,6 +14,7 @@ export default class XapiRobot extends Robot {
   constructor() {
     super()
     this.xapi = this.connection()
+    this.xapi.logger.onStream('debug', this.debugLogger)
   }
 
   connection() {

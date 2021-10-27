@@ -1,4 +1,5 @@
 node_modules/
 dist/
 .env
-log.jsonl
+log/debug.log
+log/king.jsonl
