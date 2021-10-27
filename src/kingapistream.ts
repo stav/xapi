@@ -10,19 +10,16 @@ export default class StreamingApiRobot extends SocketApiRobot {
 
   constructor() {
     super()
+    this.xapi.Stream.listen.getTrades(this.tradeEvent.bind(this))
   }
 
   async listenForTrades() {
     console.info('Listening for trades')
-    // xapi.Stream.subscribe.getBalance().catch(console.error)
-    await this.xapi.Stream.listen.getTrades((data) => { this.tradeEvent(data) })
     await this.xapi.Stream.subscribe.getTrades().catch(console.error)
   }
 
   async unListenForTrades() {
     console.info('No longer listening for trades')
-    // xapi.Stream.unSubscribe.getBalance().catch(console.error)
-    // xapi.Stream.subscribe.getTickPrices('EURUSD').catch(() => { console.error('subscribe for EURUSD failed')})
     await this.xapi.Stream.unSubscribe.getTrades().catch(console.error)
   }
 
@@ -59,7 +56,7 @@ export default class StreamingApiRobot extends SocketApiRobot {
           this.error(e)
         }
       }
-      this.printPositions()
+      await this.printPositions()
     }
   }
 
