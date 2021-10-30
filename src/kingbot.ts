@@ -7,7 +7,7 @@ export default class extends KeyedApiRobot {
     super()
   }
 
-  main () {
+  main (): void {
     super.main()
     setupStdin()
     process.stdin.on('data', (data) => this.stdIn(data))

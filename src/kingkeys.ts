@@ -4,13 +4,17 @@ const ctrlC = '\u0003'
 const ctrlD = '\u0004'
 const carriage = ['\n', '\r', '\r\n']
 
+type KeyMap = {
+  [key: string]: () => void
+}
+
 export default class KeyedApiRobot extends StreamingApiRobot {
 
-  private _keyMap: any
+  private _keyMap: KeyMap
 
   constructor() {
     super()
-    // We wrap the mapped functions to provide access to name property
+    // We wrap the mapped functions to provide access to `name` property
     // Caution: may not work with future transpiling/minification in production
     // Mapped (inner) functions not bound to instance in this context (use call)
     this._keyMap = {
@@ -20,19 +24,19 @@ export default class KeyedApiRobot extends StreamingApiRobot {
            2 : function UnListen  () { this.unListenForTrades() },
            3 : function Trade     () { this.buySellGold      () },
            5 : function Update    () { this.updateTrades     () },
-           6 : function Positions () { this.printPositions   () },
+           6 : function Positions () { this.printAllTrades   () },
            9 : function Symbols   () { this.writeAllSymbols  () },
     }
   }
 
-  async stdIn (data: Buffer) {
+  async stdIn (data: Buffer): Promise<void> {
     process.stdout.write('\n' + JSON.stringify(data) + ' ')
 
-    const key = data.toString() as keyof KeyMap
+    const key: string = data.toString()
 
     // If the key the user pressed is in the map, it's a function, execute it
     if (key in this._keyMap) {
-      await this._keyMap[ key ].call(this)
+      this._keyMap[ key ].call(this)
     }
     // Else if the key is the enter key ignore it
     else if (carriage.includes(key)) {
@@ -44,10 +48,10 @@ export default class KeyedApiRobot extends StreamingApiRobot {
     }
   }
 
-  private _printKeys() {
+  private _printKeys(): void {
     process.stdout.write('does nothing\n')
     for (const _ in this._keyMap) {
-      const func = this._keyMap[_ as keyof KeyMap]
+      const func = this._keyMap[_]
       process.stdout.write(''
         + JSON.stringify(_)
         + ' '
@@ -57,9 +61,4 @@ export default class KeyedApiRobot extends StreamingApiRobot {
     }
   }
 
-}
-
-export type KeyMap = {
-  [ctrlC]: () => Promise<void>
-  [ctrlD]: () => Promise<void>
 }

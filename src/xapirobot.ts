@@ -17,7 +17,7 @@ export default class XapiRobot extends Robot {
     this.xapi.logger.onStream('debug', this.debugLogger)
   }
 
-  connection() {
+  connection(): XAPI {
     const xapi = new XAPI({
       accountId: process.env.ACCOUNTID || '',
       password: process.env.PASSWORD || '',
@@ -30,11 +30,11 @@ export default class XapiRobot extends Robot {
     return xapi
    }
 
-  main () {
+  main (): void {
     console.info('Socket is:', this.socketStatus())
   }
 
-  socketStatus() {
+  socketStatus(): string {
     return ConnectionStatus[this.xapi.Socket.status]
   }
 

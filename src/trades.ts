@@ -75,7 +75,7 @@ function getTradesFamilys(trades: TradeRecords): PriceFamilys {
   return [priceTpMap, priceTypeMap, priceSymbolMap]
 }
 
-function printFamilys(trades: TradeRecords) {
+function printFamilys(trades: TradeRecords): void {
   if (trades.length > 1) {
     const [ priceTpMap, priceTypeMap, priceSymbolMap ] = getTradesFamilys(trades)
     console.log('Familys', priceTpMap.size)
@@ -88,7 +88,7 @@ function printFamilys(trades: TradeRecords) {
   }
 }
 
-export function printTrades(trades: TradeRecords) {
+export function printTrades(trades: TradeRecords): void {
   printFamilys(trades)
   for (let i=0; i<trades.length; i++) {
     const trade = trades[i]
@@ -100,9 +100,10 @@ export function printTrades(trades: TradeRecords) {
       '@', trade.open_price,
       'SL', trade.sl,
       'TP', trade.tp,
-      trade.profit ? `profit=${trade.profit}` : '\b',
+      trade.profit ? `profit=${trade.profit + trade.storage}` : '\b',
       trade.state ? `(${trade.state})` : '\b',
       trade.customComment ? `"${trade.customComment}"` : '\b',
+      trade.comment ? trade.comment : '\b',
     )
   }
 }

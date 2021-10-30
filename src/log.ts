@@ -1,32 +1,31 @@
 import fs from 'fs'
 import stream from 'stream'
 
-import { STREAMING_TRADE_RECORD } from 'xapi-node'
+import { STREAMING_TRADE_RECORD, TRADE_TRANS_INFO } from 'xapi-node'
 
 import error from './error'
 
+type LogRecord = STREAMING_TRADE_RECORD | TRADE_TRANS_INFO
+
 function nothing() {}
 
-function jsonLine(data: STREAMING_TRADE_RECORD | any) {
-  return JSON.stringify(data) + '\n'
-}
-
-export function kingLogger (content: STREAMING_TRADE_RECORD | any) {
+export function kingLogger (content: LogRecord): void {
   try {
-    fs.appendFile('./log/king.jsonl', jsonLine(content), nothing)
+    const json: string = JSON.stringify(content) + '\n'
+    fs.appendFile('./log/king.jsonl', json, nothing)
   }
-  catch (e: any) {
+  catch (e: unknown) {
     error(e)
   }
 }
 
 export class debugLogger extends stream.Writable {
-  _write(chunk: string | Buffer | Uint8Array, encoding: string, next: Function) {
+  _write(chunk: string | Buffer | Uint8Array, encoding: string, next: Function): void {
     try {
       fs.appendFile('./log/debug.log', chunk.toString() + '\n', nothing)
       next()
     }
-    catch (e: any) {
+    catch (e: unknown) {
       error(e)
     }
   }
