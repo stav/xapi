@@ -24,14 +24,19 @@ export default class StreamingApiRobot extends SocketApiRobot {
     await this.xapi.Stream.unSubscribe.getTrades().catch(console.error)
   }
 
+  private async _getFamilyTrades(data: STREAMING_TRADE_RECORD): Promise<TRADE_RECORD[]> {
+    const trades: TRADE_RECORD[] = await this.getAllTrades()
+    return trades.filter((trade: TRADE_RECORD) => trade.open_price === data.open_price)
+  }
+
   async tradeEvent (data: STREAMING_TRADE_RECORD) {
     this.printTrades([data])
     this.log(data)
     if (data.closed && data.comment === '[T/P]') {
       console.log('TAKE PROFIT', data)
 
-      const trades: TRADE_RECORD[] = (await this.getPositions()).filter((trade: any) => trade.open_price === data.open_price)
-      console.log('trades', trades.length)
+      const trades: TRADE_RECORD[] = await this._getFamilyTrades(data)
+      console.log('Family trades', trades.length)
       this.printTrades(trades)
 
       trades.length && console.log('Updating stop loss')
