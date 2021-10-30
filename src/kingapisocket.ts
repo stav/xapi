@@ -1,5 +1,7 @@
 import config from 'config'
 
+import { TRADE_RECORD } from 'xapi-node'
+
 import getOrders from './orders'
 import XapiRobot from './xapirobot'
 import { printTrades } from './trades'
@@ -41,26 +43,7 @@ export default class SocketApiRobot extends XapiRobot {
     delete update.entry
     let count = 0
     for (const trade of trades) {
-      const transaction = Object.assign({}, {order: trade.order}, update) // Nah { code: 'BE9', explain: 'Cannot find order' }
-      // delete transaction.cmd
-      // delete transaction.close_time
-      // delete transaction.closed
-      // delete transaction.comment
-      // delete transaction.commission
-      // delete transaction.customComment
-      // delete transaction.digits
-      // delete transaction.expiration
-      // delete transaction.margin_rate
-      // delete transaction.offset
-      // delete transaction.open_price
-      // delete transaction.open_time
-      // delete transaction.order2
-      // delete transaction.position
-      // delete transaction.sl
-      // delete transaction.storage
-      // delete transaction.symbol
-      // delete transaction.tp
-      // delete transaction.volume
+      const transaction = Object.assign({}, {order: trade.order}, update)
       console.log('transaction', transaction)
       try {
         await this.xapi.Socket.send.tradeTransaction(transaction)
@@ -79,7 +62,7 @@ export default class SocketApiRobot extends XapiRobot {
     this.printTrades(updatedTrades)
   }
 
-  async getPositions () {
+  async getAllTrades (): Promise<TRADE_RECORD[]> {
     // Basic info already available in xapi.positions
     const result = await this.xapi.Socket.send.getTrades()
     const trades = JSON.parse(result.json).returnData
@@ -88,11 +71,8 @@ export default class SocketApiRobot extends XapiRobot {
 
   async printPositions () {
     console.info('Printing positions')
-    const trades = await this.getPositions()
+    const trades: TRADE_RECORD[] = await this.getAllTrades()
     this.printTrades(trades)
-    for (const trade of trades) {
-      this.log(trade)
-    }
   }
 
 }

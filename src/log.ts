@@ -1,19 +1,17 @@
 import fs from 'fs'
 import stream from 'stream'
 
-import {
-  STREAMING_TRADE_RECORD as StreamingTradeRecord,
-} from 'xapi-node'
+import { STREAMING_TRADE_RECORD } from 'xapi-node'
 
 import error from './error'
 
 function nothing() {}
 
-function jsonLine(data: StreamingTradeRecord | any) {
+function jsonLine(data: STREAMING_TRADE_RECORD | any) {
   return JSON.stringify(data) + '\n'
 }
 
-export function kingLogger (content: StreamingTradeRecord | any) {
+export function kingLogger (content: STREAMING_TRADE_RECORD | any) {
   try {
     fs.appendFile('./log/king.jsonl', jsonLine(content), nothing)
   }

@@ -1,6 +1,5 @@
 import { setup as setupStdin } from './stdIn'
 import KeyedApiRobot from './kingkeys'
-import { KeyMap } from './kingkeys'
 
 export default class extends KeyedApiRobot {
 

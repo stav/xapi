@@ -1,7 +1,8 @@
 import {
   CMD_FIELD,
   TYPE_FIELD,
-  STREAMING_TRADE_RECORD as StreamingTradeRecord,
+  TRADE_RECORD,
+  STREAMING_TRADE_RECORD,
 } from 'xapi-node'
 
 import SocketApiRobot from './kingapisocket'
@@ -23,25 +24,18 @@ export default class StreamingApiRobot extends SocketApiRobot {
     await this.xapi.Stream.unSubscribe.getTrades().catch(console.error)
   }
 
-  async tradeEvent (data: StreamingTradeRecord) {
+  async tradeEvent (data: STREAMING_TRADE_RECORD) {
     this.printTrades([data])
     this.log(data)
     if (data.closed && data.comment === '[T/P]') {
       console.log('TAKE PROFIT', data)
-      // const positions: number[] = [data.position]
-      // const result = await xapi.Socket.send.getTradeRecords(positions)
-      // const trades = JSON.parse(result.json).returnData
 
-      const xapiTrades = this.xapi.positions.filter(trade => trade.open_price === data.open_price)
-      console.log('xapiTrades', xapiTrades.length)
-      this.printTrades(xapiTrades)
+      const trades: TRADE_RECORD[] = (await this.getPositions()).filter((trade: any) => trade.open_price === data.open_price)
+      console.log('trades', trades.length)
+      this.printTrades(trades)
 
-      const socketTrades = (await this.getPositions()).filter((trade: any) => trade.open_price === data.open_price)
-      console.log('socketTrades', socketTrades.length)
-      this.printTrades(socketTrades)
-
-      socketTrades.length && console.log('Updating stop loss')
-      for (const trade of socketTrades) {
+      trades.length && console.log('Updating stop loss')
+      for (const trade of trades) {
         const betterment = data.cmd === CMD_FIELD.SELL ? -0.50 : 0.50
         const transaction: any = {
           order: trade.order,

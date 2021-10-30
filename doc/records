@@ -1,0 +1,63 @@
+TRADE_RECORD
+
+    http://developers.xstore.pro/documentation/#TRADE_RECORD
+
+    name                    type                    description
+
+    close_price             Floating number         Close price in base currency
+    close_time              Time                    Null if order is not closed
+    close_timeString        String                  Null if order is not closed
+    closed                  Boolean                 Closed
+    cmd                     Number                  Operation code
+    comment                 String                  Comment
+    commission              Floating number         Commission in account currency, null if not applicable
+    customComment           String                  The value the customer may provide in order to retrieve it later.
+    digits                  Number                  Number of decimal places
+    expiration              Time                    Null if order is not closed
+    expirationString        String                  Null if order is not closed
+    margin_rate             Floating number         Margin rate
+    offset                  Number                  Trailing offset
+    open_price              Floating number         Open price in base currency
+    open_time               Time                    Open time
+    open_timeString         String                  Open time string
+    order                   Number                  Order number for opened transaction
+    order2                  Number                  Order number for closed transaction
+    position                Number                  Order number common both for opened and closed transaction
+    profit                  Floating number         Profit in account currency
+    sl                      Floating number         Zero if stop loss is not set (in base currency)
+    storage                 Floating number         order swaps in account currency
+    symbol                  String                  symbol name or null for deposit/withdrawal operations
+    timestamp               Time                    Timestamp
+    tp                      Floating number         Zero if take profit is not set (in base currency)
+    volume                  Floating number         Volume in lots
+
+STREAMING_TRADE_RECORD
+
+    http://developers.xstore.pro/documentation/#STREAMING_TRADE_RECORD
+
+    name           type             description
+
+    close_price             Floating number         Close price in base currency
+    close_time              Time                    Null if order is not closed
+    closed                  Boolean                 Closed
+    cmd                     Number                  Operation code
+    comment                 String                  Comment
+    commission              Floating number         Commission in account currency, null if not applicable
+    customComment           String                  The value the customer may provide in order to retrieve it later.
+    digits                  Number                  Number of decimal places
+    expiration              Time                    Null if order is not closed
+    margin_rate             Floating number         Margin rate
+    offset                  Number                  Trailing offset
+    open_price              Floating number         Open price in base currency
+    open_time               Time                    Open time
+    order                   Number                  Order number for opened transaction
+    order2                  Number                  Transaction id
+    position                Number                  Position number (if type is 0 and 2) or transaction parameter (if type is 1)
+    profit                  Floating number         null unless the trade is closed (type=2) or opened (type=0)
+    sl                      Floating number         Zero if stop loss is not set (in base currency)
+    state                   String                  Trade state, should be used for detecting pending order's cancellation
+    storage                 Floating number         Storage
+    symbol                  String                  Symbol
+    tp                      Floating number         Zero if take profit is not set (in base currency)
+    type                    Number                  type
+    volume                  Floating number         Volume in lots
