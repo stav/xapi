@@ -34,7 +34,7 @@ export default class XapiRobot extends Robot {
     console.info('Socket is:', this.socketStatus())
   }
 
-  socketStatus(): string {
+  private socketStatus(): string {
     return ConnectionStatus[this.xapi.Socket.status]
   }
 

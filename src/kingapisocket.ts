@@ -1,6 +1,10 @@
 import config from 'config'
 
-import { TRADE_RECORD, TRADE_TRANS_INFO } from 'xapi-node'
+import {
+  TRADE_RECORD,
+  TRADE_TRANS_INFO,
+  STREAMING_TRADE_RECORD,
+} from 'xapi-node'
 
 import getOrders from './orders'
 import XapiRobot from './xapirobot'
@@ -23,7 +27,7 @@ export default class SocketApiRobot extends XapiRobot {
     this.writeAllSymbols = () => writeAllSymbols(this.xapi)
   }
 
-  async buySellGold(): Promise<void> {
+  protected async buySellGold(): Promise<void> {
     console.info('Buying or selling gold')
     const orders: TRADE_TRANS_INFO[] = getOrders()
     console.info(orders.length, 'orders to be created')
@@ -39,7 +43,7 @@ export default class SocketApiRobot extends XapiRobot {
     }
   }
 
-  async updateTrades(): Promise<void> {
+  protected async updateTrades(): Promise<void> {
     const update: UpdateTransactionInfo = config.util.loadFileConfigs().Update
     const entry: number = update.entry
     const trades = this.xapi.positions.filter(trade => trade.open_price === entry) // TODO: could be getFamilyTrades or something
@@ -66,15 +70,20 @@ export default class SocketApiRobot extends XapiRobot {
     this.printTrades(updatedTrades)
   }
 
-  async getAllTrades (): Promise<TRADE_RECORD[]> {
+  private async getFamilyTrades(data: STREAMING_TRADE_RECORD): Promise<TRADE_RECORD[]> {
+    const trades: TRADE_RECORD[] = await this.getAllTrades()
+    return trades.filter((trade: TRADE_RECORD) => trade.open_price === data.open_price)
+  }
+
+  private async getAllTrades (): Promise<TRADE_RECORD[]> {
     // Basic info already available in xapi.positions
     const result = await this.xapi.Socket.send.getTrades()
     const trades: TRADE_RECORD[] = JSON.parse(result.json).returnData
     return trades.sort((a: TRADE_RECORD, b: TRADE_RECORD) => a.open_time - b.open_time)
   }
 
-  async printAllTrades (): Promise<void> {
-    console.info('Printing positions')
+  protected async printAllTrades (): Promise<void> {
+    console.info('Printing all positions')
     const trades: TRADE_RECORD[] = await this.getAllTrades()
     this.printTrades(trades)
   }

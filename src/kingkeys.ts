@@ -29,7 +29,7 @@ export default class KeyedApiRobot extends StreamingApiRobot {
     }
   }
 
-  async stdIn (data: Buffer): Promise<void> {
+  protected async stdIn (data: Buffer): Promise<void> {
     process.stdout.write('\n' + JSON.stringify(data) + ' ')
 
     const key: string = data.toString()
