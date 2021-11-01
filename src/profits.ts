@@ -6,9 +6,11 @@ import {
   STREAMING_TRADE_RECORD,
 } from 'xapi-node'
 
+import KingBot from './kingbot'
+
 type UpdateTransactionEvent = Partial<TRADE_TRANS_INFO>
 
-export async function takeProfits (this: any, data: STREAMING_TRADE_RECORD): Promise<void> {
+export async function takeProfits (this: KingBot, data: STREAMING_TRADE_RECORD): Promise<void> {
   if (data.closed && data.comment === '[T/P]') {
     console.log('TAKE PROFIT', data)
 

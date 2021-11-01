@@ -7,13 +7,13 @@ import {
 type TradeRecords = TRADE_RECORD[] | STREAMING_TRADE_RECORD[]
 type NumberMap = Map<number, Array<number>>
 type StringMap = Map<number, Array<string>>
-type PriceMap = NumberMap | StringMap
-type PriceFamilys = [PriceMap, PriceMap, PriceMap]
+type FamilyMap = NumberMap | StringMap
+type FamilyMaps = [FamilyMap, FamilyMap, FamilyMap]
 
-/** getTradesFamilys
+/** getFamilyMaps
  **
- ** This function groups all trades into what is called a "family" keyed by "price".
- ** In other words all trades with the same entry price belong to the same family.
+ ** This function groups all trades into what is called a "family" keyed by "sl".
+ ** In other words all trades with the same stop loss belong to the same family.
  **
  ** @todo This would be better served by grouping by the "position" field or even
  **       the "customComment" field but unfortunately these fields are unreliable.
@@ -31,59 +31,63 @@ type PriceFamilys = [PriceMap, PriceMap, PriceMap]
  **
  ** Produce two (2) familys:
  **
- **   Price 1782.07 ['BUY'] ['GOLD'] TPs [ 1784, 1786, 1789, 1792, 1797 ]
- **   Price 4200 ['SELL_STOP'] ['ETHEREUM'] TPs [ 4160, 4150, 4140, 4100 ]
+ **   SL 1765 ['BUY'] ['GOLD'] TPs [ 1784, 1786, 1789, 1792, 1797 ]
+ **   SL 4800 ['SELL_STOP'] ['ETHEREUM'] TPs [ 4160, 4150, 4140, 4100 ]
  **
- ** @returns a 3-member Tuple of Maps keyed on price
+ ** @seealso getFamilyTrades
+ **
+ ** @returns a 3-member Tuple of Maps keyed on stop loss
+ **
+ **   [ tpMap, typeMap, symbolMap ]
  **
  ** Example: [
- **   Map(2) { 1782.07 => [ 1784, 1786, 1789, 1792, 1797 ],
- **            4200 => [ 4160, 4150, 4140, 4100 ] },
- **   Map(2) { 1782.07 => [ 'BUY' ], 4200 => [ 'SELL_STOP' ] },
- **   Map(2) { 1782.07 => [ 'GOLD' ], 4200 => [ 'ETHEREUM' ] }
+ **   Map(2) { 1765 => [ 1784, 1786, 1789, 1792, 1797 ],
+ **            4800 => [ 4160, 4150, 4140, 4100 ] },
+ **   Map(2) { 1765 => [ 'BUY' ], 4800 => [ 'SELL_STOP' ] },
+ **   Map(2) { 1765 => [ 'GOLD' ], 4800 => [ 'ETHEREUM' ] }
  ** ]
  **/
-function getTradesFamilys(trades: TradeRecords): PriceFamilys {
-  const priceTpMap = new Map()
-  const priceTypeMap = new Map()
-  const priceSymbolMap = new Map()
+function getFamilyMaps(trades: TradeRecords): FamilyMaps {
+  const tpMap = new Map()
+  const typeMap = new Map()
+  const symbolMap = new Map()
   // First loop thru trades to create three (3) Map<number, Set>
   for (const trade of trades) {
-    const price = trade.open_price
-    const tps = priceTpMap.get(price) || new Set()
-    const types = priceTypeMap.get(price) || new Set()
-    const symbols = priceSymbolMap.get(price) || new Set()
+    const key = trade.sl
+    const tps = tpMap.get(key) || new Set()
+    const types = typeMap.get(key) || new Set()
+    const symbols = symbolMap.get(key) || new Set()
     tps.add(trade.tp)
     types.add(CMD_FIELD[trade.cmd])
     symbols.add(trade.symbol)
-    priceTpMap.set(price, tps)
-    priceTypeMap.set(price, types)
-    priceSymbolMap.set(price, symbols)
+    tpMap.set(key, tps)
+    typeMap.set(key, types)
+    symbolMap.set(key, symbols)
   }
   // Then spin thru all the maps and replace Set values with Array values
-  for (const [price, tpsSet] of priceTpMap) {
-    const symbols = [...priceSymbolMap.get(price) as Set<string>]
-    const types = [...priceTypeMap.get(price) as Set<string>]
+  for (const [key, tpsSet] of tpMap) {
+    const symbols = [...symbolMap.get(key) as Set<string>]
+    const types = [...typeMap.get(key) as Set<string>]
     const tps = [...tpsSet].sort()
-    if (types[0].indexOf('SELL') > -1) {
+    if (types[0].indexOf('SELL') > -1) { // TODO: make sure types.length === 1
       tps.reverse()
     }
-    priceTpMap.set(price, tps)
-    priceTypeMap.set(price, types)
-    priceSymbolMap.set(price, symbols)
+    tpMap.set(key, tps)
+    typeMap.set(key, types)
+    symbolMap.set(key, symbols)
   }
-  return [priceTpMap, priceTypeMap, priceSymbolMap]
+  return [tpMap, typeMap, symbolMap]
 }
 
 function printFamilys(trades: TradeRecords): void {
   if (trades.length > 1) {
-    const [ priceTpMap, priceTypeMap, priceSymbolMap ] = getTradesFamilys(trades)
-    console.log('Familys', priceTpMap.size)
-    // console.log('Familys', priceTpMap.size, priceTpMap, priceTypeMap, priceSymbolMap)
-    for (const [price, tps] of priceTpMap) {
-      const symbols = [...priceSymbolMap.get(price) as number[]]
-      const types = [...priceTypeMap.get(price) as number[]]
-      console.log(' Price', price, types, symbols, 'TPs', tps)
+    const [ tpMap, typeMap, symbolMap ] = getFamilyMaps(trades)
+    console.log('Familys', tpMap.size)
+    // console.log('Familys', tpMap.size, tpMap, typeMap, symbolMap)
+    for (const [key, tps] of tpMap) {
+      const symbols = [...symbolMap.get(key) as number[]]
+      const types = [...typeMap.get(key) as number[]]
+      console.log(' SL', key, types, symbols, 'TPs', tps)
     }
   }
 }

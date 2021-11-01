@@ -1,18 +1,26 @@
 Tip:
   symbol: BITCOIN
   type: BUY
-  entry: 60488
-  sl: 58000
-  tps: [62000]
+  entry: 62000
+  sl: 59000
+  tps: [62400, 62800, 63200, 63600]
   volume: 1
 
-2021-10-25:
-  symbol: GOLD
-  type: SELL
-  entry: 1801.20
-  sl: 1810.20
-  tps: [1798.20, 1795.20, 1791.20, 1785.20]
-  volume: 10
+  2021-11-01:
+    symbol: GOLD
+    type: BUY
+    entry: 1787
+    sl: 1777
+    tps: [1802, 1797, 1794, 1797, 1802]
+    volume: 10
+
+  2021-10-25:
+    symbol: GOLD
+    type: SELL
+    entry: 1801.20
+    sl: 1810.20
+    tps: [1798.20, 1795.20, 1791.20, 1785.20]
+    volume: 10
 
 2021-10-22:
   symbol: GOLD
