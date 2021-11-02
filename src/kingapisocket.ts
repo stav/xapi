@@ -71,8 +71,11 @@ export default class SocketApiRobot extends XapiRobot {
   }
 
   protected async getFamilyTrades(data: STREAMING_TRADE_RECORD): Promise<TRADE_RECORD[]> {
-    const trades: TRADE_RECORD[] = await this.getAllTrades()
-    return trades.filter((trade: TRADE_RECORD) => trade.sl === data.sl)
+    let trades: TRADE_RECORD[] = await this.getAllTrades()
+    trades = trades.filter((trade: TRADE_RECORD) => trade.sl === data.sl)
+    console.log('Family trades', trades.length)
+    this.printTrades(trades)
+    return trades
   }
 
   private async getAllTrades (): Promise<TRADE_RECORD[]> {
