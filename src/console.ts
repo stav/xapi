@@ -19,13 +19,13 @@ export async function error (_e: unknown, ...data: any[]): Promise<void> {
   if (!message) {
     message = e.toString()
   }
-  console.error('ERROR:', message.replace(/^[\|\s]+/, ''))
+  console.error('ERROR:', message.replace(/^[\|\s]+/, ''), ...data)
 }
 
 export default class Console {
 
   error(e?: unknown, ...optionalParams: any[]): void {
-    error(e)
+    error(e, ...optionalParams)
   }
 
 }
