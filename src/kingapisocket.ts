@@ -33,12 +33,7 @@ export default class SocketApiRobot extends XapiRobot {
     console.info(orders.length, 'orders to be created')
     for (const order of orders) {
       console.info(order)
-      try {
-        await this.xapi.Socket.send.tradeTransaction(order)
-      }
-      catch (e: unknown) {
-        this.error(e)
-      }
+      await this.xapi.Socket.send.tradeTransaction(order).catch(console.warn)
       this.log(order)
     }
   }
@@ -53,21 +48,18 @@ export default class SocketApiRobot extends XapiRobot {
     for (const trade of trades) {
       const { entry, ...transaction } = Object.assign({}, {order: trade.order}, update)
       console.log('transaction', transaction)
-      try {
-        await this.xapi.Socket.send.tradeTransaction(transaction)
-        // TODO: Need to confirm transaction before incrementing count
-        // TODO: Watch for duplicate orders
-        count++
-      }
-      catch (e: unknown) {
-        this.error(e)
-      }
+      await this.xapi.Socket.send.tradeTransaction(transaction).catch(console.warn)
+      // TODO: Need to confirm transaction before incrementing count
+      // TODO: Watch for duplicate orders
+      count++
     }
     console.log('Updated', count, 'trades with entry', entry, 'to', update)
     const positions: number[] = trades.map(trade => trade.position)
-    const result = await this.xapi.Socket.send.getTradeRecords(positions)
-    const updatedTrades = JSON.parse(result.json).returnData
-    this.printTrades(updatedTrades)
+    const result = await this.xapi.Socket.send.getTradeRecords(positions).catch(console.warn)
+    if (result) {
+      const updatedTrades = JSON.parse(result.json).returnData
+      this.printTrades(updatedTrades)
+    }
   }
 
   protected async getFamilyTrades(data: STREAMING_TRADE_RECORD): Promise<TRADE_RECORD[]> {
@@ -80,17 +72,12 @@ export default class SocketApiRobot extends XapiRobot {
 
   private async getAllTrades (): Promise<TRADE_RECORD[]> {
     // Basic info already available in xapi.positions
-    let trades: TRADE_RECORD[] = []
-    try {
-      const result = await this.xapi.Socket.send.getTrades()
-      trades = JSON.parse(result.json).returnData
+    const result = await this.xapi.Socket.send.getTrades().catch(console.warn)
+    if (!result) {
+      return []
     }
-    catch (e) {
-      console.error(e)
-    }
-    finally {
-      return trades.sort((a: TRADE_RECORD, b: TRADE_RECORD) => a.open_time - b.open_time)
-    }
+    const trades: TRADE_RECORD[] = JSON.parse(result.json).returnData
+    return trades.sort((a: TRADE_RECORD, b: TRADE_RECORD) => a.open_time - b.open_time)
   }
 
   protected async printAllTrades (): Promise<void> {

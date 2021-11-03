@@ -19,5 +19,5 @@ export default function (_e: unknown) {
   if (!message) {
     message = e.toString()
   }
-  console.error(message)
+  console.warn('ERROR:', message)
 }

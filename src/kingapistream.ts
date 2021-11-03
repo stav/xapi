@@ -14,12 +14,12 @@ export default class StreamingApiRobot extends SocketApiRobot {
 
   protected async listenForTrades(): Promise<void> {
     console.info('Listening for trades')
-    await this.xapi.Stream.subscribe.getTrades().catch(console.error)
+    await this.xapi.Stream.subscribe.getTrades().catch(console.warn)
   }
 
   protected async unListenForTrades(): Promise<void> {
     console.info('No longer listening for trades')
-    await this.xapi.Stream.unSubscribe.getTrades().catch(console.error)
+    await this.xapi.Stream.unSubscribe.getTrades().catch(console.warn)
   }
 
   private async tradeEvent (data: STREAMING_TRADE_RECORD): Promise<void> {

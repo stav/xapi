@@ -30,18 +30,14 @@ export async function takeProfits (this: KingBot, data: STREAMING_TRADE_RECORD):
     console.log('TAKE PROFIT', data)
     const trades: TRADE_RECORD[] = await this.getFamilyTrades(data)
     const transaction: UpdateOrderEvent = getTransaction(data, trades)
+    const tradeTransaction = this.xapi.Socket.send.tradeTransaction
     trades.length && console.log('Updating stop loss for', trades.length, 'orders')
 
     for (const trade of trades) {
       transaction.order = trade.order
       console.log('transaction', transaction)
-      try {
-        // The transaction will fail if the take-profit is "worse" than the entry price
-        await this.xapi.Socket.send.tradeTransaction(<TRADE_TRANS_INFO>transaction)
-      }
-      catch (e: unknown) {
-        this.error(e)
-      }
+      // The transaction will fail if the take-profit is "worse" than the entry price
+      await tradeTransaction(<TRADE_TRANS_INFO>transaction).catch(console.warn)
     }
     await this.printAllTrades()
   }
