@@ -37,7 +37,7 @@ export async function takeProfits (this: KingBot, data: STREAMING_TRADE_RECORD):
       transaction.order = trade.order
       console.log('transaction', transaction)
       // The transaction will fail if the take-profit is "worse" than the entry price
-      await tradeTransaction(<TRADE_TRANS_INFO>transaction).catch(console.warn)
+      await tradeTransaction(<TRADE_TRANS_INFO>transaction).catch(this.console.error)
     }
     await this.printAllTrades()
   }

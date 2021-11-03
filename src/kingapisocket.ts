@@ -24,7 +24,7 @@ export default class SocketApiRobot extends XapiRobot {
   constructor() {
     super()
     this.printTrades = printTrades
-    this.writeAllSymbols = () => writeAllSymbols(this.xapi)
+    this.writeAllSymbols = writeAllSymbols
   }
 
   protected async buySellGold(): Promise<void> {
@@ -33,7 +33,7 @@ export default class SocketApiRobot extends XapiRobot {
     console.info(orders.length, 'orders to be created')
     for (const order of orders) {
       console.info(order)
-      await this.xapi.Socket.send.tradeTransaction(order).catch(console.warn)
+      await this.xapi.Socket.send.tradeTransaction(order).catch(this.console.error)
       this.log(order)
     }
   }
@@ -48,14 +48,14 @@ export default class SocketApiRobot extends XapiRobot {
     for (const trade of trades) {
       const { entry, ...transaction } = Object.assign({}, {order: trade.order}, update)
       console.log('transaction', transaction)
-      await this.xapi.Socket.send.tradeTransaction(transaction).catch(console.warn)
+      await this.xapi.Socket.send.tradeTransaction(transaction).catch(this.console.error)
       // TODO: Need to confirm transaction before incrementing count
       // TODO: Watch for duplicate orders
       count++
     }
     console.log('Updated', count, 'trades with entry', entry, 'to', update)
     const positions: number[] = trades.map(trade => trade.position)
-    const result = await this.xapi.Socket.send.getTradeRecords(positions).catch(console.warn)
+    const result = await this.xapi.Socket.send.getTradeRecords(positions).catch(this.console.error)
     if (result) {
       const updatedTrades = JSON.parse(result.json).returnData
       this.printTrades(updatedTrades)
@@ -72,7 +72,7 @@ export default class SocketApiRobot extends XapiRobot {
 
   private async getAllTrades (): Promise<TRADE_RECORD[]> {
     // Basic info already available in xapi.positions
-    const result = await this.xapi.Socket.send.getTrades().catch(console.warn)
+    const result = await this.xapi.Socket.send.getTrades().catch(this.console.error)
     if (!result) {
       return []
     }

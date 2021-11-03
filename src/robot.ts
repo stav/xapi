@@ -1,15 +1,15 @@
-import error from './error'
+import Console from './console'
 import { kingLogger, debugLogger } from './log'
 
 export default class Robot {
 
-  protected error: Function
   protected log: Function
+  protected console: Console
   protected debugLogger: debugLogger
 
   constructor() {
-    this.error = error
     this.log = kingLogger
+    this.console = new Console()
     this.debugLogger = new debugLogger()
   }
 

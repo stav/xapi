@@ -7,7 +7,7 @@ interface GeneralError {
   params?: Params
 }
 
-export default function (_e: unknown) {
+export async function error (_e: unknown, ...data: any[]): Promise<void> {
   const e: GeneralError = <GeneralError>_e
   let message = ''
   if (e.message) {
@@ -19,5 +19,13 @@ export default function (_e: unknown) {
   if (!message) {
     message = e.toString()
   }
-  console.warn('ERROR:', message)
+  console.error('ERROR:', message.replace(/^[\|\s]+/, ''))
+}
+
+export default class Console {
+
+  error(e?: unknown, ...optionalParams: any[]): void {
+    error(e)
+  }
+
 }

@@ -3,7 +3,7 @@ import stream from 'stream'
 
 import { STREAMING_TRADE_RECORD, TRADE_TRANS_INFO } from 'xapi-node'
 
-import error from './error'
+import { error } from './console'
 
 type LogRecord = STREAMING_TRADE_RECORD | TRADE_TRANS_INFO
 
