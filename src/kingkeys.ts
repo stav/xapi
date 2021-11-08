@@ -20,13 +20,16 @@ export default class KeyedApiRobot extends StreamingApiRobot {
     this._keyMap = {
       [ctrlC]: function Disconnect() { this.disconnect       () },
       [ctrlD]: function Disconnect() { this.disconnect       () },
-           1 : function Listen    () { this.listenForTrades  () },
-           2 : function UnListen  () { this.unListenForTrades() },
-           3 : function Trade_Tip () { this.buySellTip   () },
-           4 : function Trade_Prc () { this.buySellPrice () },
+       //  1 : function _ () { },
+       //  2 : function _ () { },
+           3 : function Trade_Tip () { this.buySellTip       () },
+           4 : function Trade_Prc () { this.buySellPrice     () },
            5 : function Update    () { this.updateTrades     () },
            6 : function Positions () { this.printAllTrades   () },
+       //  7 : function _ () { },
+       //  8 : function _ () { },
            9 : function Symbols   () { this.writeAllSymbols  () },
+       //  0 : function _ () { },
     }
   }
 
