@@ -1,14 +1,14 @@
 import { STREAMING_TRADE_RECORD } from 'xapi-node'
 import SocketApiRobot from './kingapisocket'
-import { takeProfits } from './profits'
+import { checkProfits } from './profits'
 
 export default class StreamingApiRobot extends SocketApiRobot {
 
-  protected takeProfits: Function
+  protected checkProfits: Function
 
   constructor() {
     super()
-    this.takeProfits = takeProfits
+    this.checkProfits = checkProfits
     this.xapi.Stream.listen.getTrades(this.tradeEvent.bind(this))
   }
 
@@ -24,7 +24,7 @@ export default class StreamingApiRobot extends SocketApiRobot {
 
   private async tradeEvent (data: STREAMING_TRADE_RECORD): Promise<void> {
     this.printTrades([data])
-    this.takeProfits(data)
+    this.checkProfits(data)
     this.log(data)
   }
 
