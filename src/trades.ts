@@ -10,7 +10,7 @@ type StringMap = Map<number, Array<string>>
 type FamilyMap = NumberMap | StringMap
 type FamilyMaps = [FamilyMap, FamilyMap, FamilyMap]
 
-/** getFamilyMaps
+/** @name getFamilyMaps
  **
  ** This function groups all trades into what is called a "family" keyed by "sl".
  ** In other words all trades with the same stop loss belong to the same family.
@@ -51,13 +51,13 @@ function getFamilyMaps(trades: TradeRecords): FamilyMaps {
   const tpMap = new Map()
   const typeMap = new Map()
   const symbolMap = new Map()
-  // First loop thru trades to create three (3) Map<number, Set>
+  // First loop thru trades to create three (3) Map<number, Array|Set>
   for (const trade of trades) {
     const key = trade.sl
-    const tps = tpMap.get(key) || new Set()
+    const tps = tpMap.get(key) || new Array()
     const types = typeMap.get(key) || new Set()
     const symbols = symbolMap.get(key) || new Set()
-    tps.add(trade.tp)
+    tps.push(trade.tp)
     types.add(CMD_FIELD[trade.cmd])
     symbols.add(trade.symbol)
     tpMap.set(key, tps)
@@ -65,10 +65,10 @@ function getFamilyMaps(trades: TradeRecords): FamilyMaps {
     symbolMap.set(key, symbols)
   }
   // Then spin thru all the maps and replace Set values with Array values
-  for (const [key, tpsSet] of tpMap) {
+  for (const [key, tpArray] of tpMap) {
     const symbols = [...symbolMap.get(key) as Set<string>]
     const types = [...typeMap.get(key) as Set<string>]
-    const tps = [...tpsSet].sort()
+    const tps = tpArray.sort()
     if (types[0].indexOf('SELL') > -1) { // TODO: make sure types.length === 1
       tps.reverse()
     }

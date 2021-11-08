@@ -57,11 +57,11 @@ export default class SocketApiRobot extends XapiRobot {
       // The next line shadows `entry` just for this (for) block in order to not include it in `transaction`
       const { entry, ...transaction } = Object.assign({}, {order: trade.order}, update)
       console.log('transaction', transaction)
-      const result: TradeStatus = await tradeTransaction(transaction).catch(this.console.error)
+      const result: TradeStatus = await tradeTransaction(transaction).catch(this.console.error) // Need to retry failed transaction
       if (result) {
         // TODO: Watch for duplicate orders
         if (result.requestStatus === REQUEST_STATUS_FIELD.ACCEPTED) {
-          const status = await tradeTransactionStatus(result.order).catch(this.console.error)
+          const status = await tradeTransactionStatus(result.order).catch(this.console.error) // Need to retry failed transaction
           if (status) {
             if (status.returnData.requestStatus === REQUEST_STATUS_FIELD.ACCEPTED) {
               count++
