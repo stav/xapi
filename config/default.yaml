@@ -4,22 +4,22 @@ Tip:
   entry: 62000
   sl: 59000
   tps: [ 62400, 62800, 63200, 63600 ]
-  volume: 1
+  volume: 0.1
 
 Test:
   Assets:
     - symbol: BITCOIN
-      volume: 1
+      volume: 0.1
       digits: 2
     - symbol: ETHEREUM
-      volume: 10
+      volume: 1
       digits: 3
     - symbol: RIPPLE
       modify: 10
       volume: 1000
       digits: 4
     - symbol: LITECOIN
-      volume: 100
+      volume: 10
       digits: 3
 
 Update:

@@ -19,6 +19,10 @@ function getLevel(data: STREAMING_TRADE_RECORD): number {
   function stoplossWorseThanEntry(): boolean {
     return isBuyOrder ? data.sl < data.open_price : data.sl > data.open_price
   }
+  // TODO If somehow the bot misses the break-even from TP1
+  // When we see the next take-profit, let's say TP2
+  // it will set the SL to Open price instead of where it should be at TP1
+  // (or in the current implementation: halfway between Open & TP2)
   if (stoplossWorseThanEntry()) {
     return data.open_price
   }
