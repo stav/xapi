@@ -1,0 +1,21 @@
+getTickPrices
+
+	returnData
+		{
+			quotations: [
+				{
+					symbol: 'GOLD',
+					ask: 1818.6,
+					bid: 1817.81,
+					high: 1818.31,
+					low: 1785.07,
+					askVolume: 0,
+					bidVolume: 0,
+					timestamp: 1636145972893,
+					level: 0,
+					exemode: 1,
+					spreadRaw: 0.79,
+					spreadTable: 0.79
+				}
+			]
+		}

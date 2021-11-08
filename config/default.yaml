@@ -3,24 +3,45 @@ Tip:
   type: BUY
   entry: 62000
   sl: 59000
-  tps: [62400, 62800, 63200, 63600]
+  tps: [ 62400, 62800, 63200, 63600 ]
   volume: 1
 
-  2021-11-01:
-    symbol: GOLD
-    type: BUY
-    entry: 1787
-    sl: 1777
-    tps: [1802, 1797, 1794, 1797, 1802]
-    volume: 10
+Test:
+  Assets:
+    - symbol: BITCOIN
+      volume: 1
+      digits: 2
+    - symbol: ETHEREUM
+      volume: 10
+      digits: 3
+    - symbol: RIPPLE
+      modify: 10
+      volume: 1000
+      digits: 4
+    - symbol: LITECOIN
+      volume: 100
+      digits: 3
 
-  2021-10-25:
-    symbol: GOLD
-    type: SELL
-    entry: 1801.20
-    sl: 1810.20
-    tps: [1798.20, 1795.20, 1791.20, 1785.20]
-    volume: 10
+Update:
+  type: 3
+  entry: 4410
+  sl: 4200
+
+2021-11-01:
+  symbol: GOLD
+  type: BUY
+  entry: 1787
+  sl: 1777
+  tps: [1802, 1797, 1794, 1797, 1802]
+  volume: 10
+
+2021-10-25:
+  symbol: GOLD
+  type: SELL
+  entry: 1801.20
+  sl: 1810.20
+  tps: [1798.20, 1795.20, 1791.20, 1785.20]
+  volume: 10
 
 2021-10-22:
   symbol: GOLD
@@ -53,8 +74,3 @@ Bitcoin:
   sl: 63800
   tps: [65300, 65400, 65500]
   volume: 1
-
-Update:
-  type: 3
-  entry: 4410
-  sl: 4200

@@ -18,6 +18,7 @@ export default class StreamingApiRobot extends SocketApiRobot {
   }
 
   protected async unListenForTrades(): Promise<void> {
+    // TODO: This does not seem to be working
     console.info('No longer listening for trades')
     await this.xapi.Stream.unSubscribe.getTrades().catch(this.console.error)
   }
