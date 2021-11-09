@@ -21,7 +21,7 @@ export async function updateTrades(this: KingBot): Promise<void> {
 
   const update: UpdateTransactionInfo = config.util.loadFileConfigs().Update
   const entry: number = update.entry
-  const trades = this.xapi.positions.filter(trade => trade.open_price === entry) // TODO: could be stop loss or getFamilyTrades or something
+  const trades = this.xapi.positions.filter(trade => trade.open_price === entry) // TODO: could be stop loss or family-trades or something
   console.log('Update trades with open price of', entry)
   this.printTrades(trades)
   let count = 0

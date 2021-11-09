@@ -15,7 +15,7 @@ interface Asset {
 }
 
 export default async function (getTickPrices: Function, error: Function): Promise<TRADE_TRANS_INFO[]> {
-  const assets: Asset[] = config.util.loadFileConfigs().Test.Assets
+  const assets: Asset[] = config.util.loadFileConfigs().Test.Assets || []
 
   const result = await getTickPrices(assets.map(a => a.symbol)).catch(error)
   if (!result) {
