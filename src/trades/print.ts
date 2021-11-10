@@ -4,6 +4,7 @@ import {
   STREAMING_TRADE_RECORD,
 } from 'xapi-node'
 
+import KingBot from '../kingbot'
 import getFamilyMaps from './getFamilyMaps'
 
 type TradeRecords = TRADE_RECORD[] | STREAMING_TRADE_RECORD[]
@@ -20,9 +21,10 @@ function printFamilys(trades: TradeRecords): void {
     }
   }
 }
+
 /** @name printTrades
  **/
-export default function (trades: TradeRecords): void {
+export function printTrades (trades: TradeRecords): void {
   printFamilys(trades)
   for (let i=0; i<trades.length; i++) {
     const trade = trades[i]
@@ -40,4 +42,12 @@ export default function (trades: TradeRecords): void {
       trade.comment ? trade.comment : '\b',
     )
   }
+}
+
+/** @name printAllTrades
+ **/
+export async function printAllTrades (this: KingBot): Promise<void> {
+  console.info('Printing all positions')
+  const trades: TRADE_RECORD[] = await this.getAllTrades()
+  this.printTrades(trades)
 }
