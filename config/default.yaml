@@ -24,8 +24,16 @@ Test:
 
 Update:
   type: 3
-  entry: 4410
-  sl: 4200
+  entry: 1825.8
+  sl: 1833.8
+
+2021-11-09:
+  symbol: GOLD
+  type: SELL
+  entry: 1824
+  sl: 1833.80
+  tps: [ 1822.80, 1819.80, 1815.80, 1823.80, 1808.80 ]
+  volume: 10
 
 2021-11-01:
   symbol: GOLD

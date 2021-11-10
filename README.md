@@ -88,7 +88,7 @@ Then TP3 (the last order) does not move any stop loss.
 
 ## Usage
 
-    $ pnpm tsc && node dist/src/index.js
+    $ pnpm tsc && node dist/index.js
 
     Socket is: CONNECTED
 
