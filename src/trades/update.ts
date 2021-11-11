@@ -32,31 +32,31 @@ export async function updateTrades(this: KingBot): Promise<void> {
     // The next line shadows `entry` just for this (for) block in order to not include it in `transaction`
     const { entry, ...transaction } = Object.assign({}, {order: trade.order}, update)
     console.log('transaction', transaction)
-    const result: TradeStatus = await tradeTransaction(transaction).catch(this.console.error) // Need to retry failed transaction
+    const result: TradeStatus = await tradeTransaction(transaction).catch(this.log.error) // Need to retry failed transaction
     if (result) {
       // TODO: Watch for duplicate orders
       if (result.requestStatus === REQUEST_STATUS_FIELD.ACCEPTED) {
-        const status = await tradeTransactionStatus(result.order).catch(this.console.error) // Need to retry failed transaction
+        const status = await tradeTransactionStatus(result.order).catch(this.log.error) // Need to retry failed transaction
         if (status) {
           if (status.returnData.requestStatus === REQUEST_STATUS_FIELD.ACCEPTED) {
             count++
           }
           else if (status.returnData.requestStatus === REQUEST_STATUS_FIELD.PENDING) {
-            this.console.error('Update trades status:', status.returnData.message)
+            this.log.error('Update trades status:', status.returnData.message)
           }
           else {
-            this.console.error(new Error('Update trades status not accepted:'), status.returnData)
+            this.log.error(new Error('Update trades status not accepted:'), status.returnData)
           }
         }
       }
       else {
-        this.console.error(new Error('Update trades request not accepted:'), result)
+        this.log.error(new Error('Update trades request not accepted:'), result)
       }
     }
   }
   console.log('Updated', count, 'trades with entry', entry)
   const positions: number[] = trades.map(trade => trade.position)
-  const result = await getTradeRecords(positions).catch(this.console.error)
+  const result = await getTradeRecords(positions).catch(this.log.error)
   if (result) {
     const updatedTrades = JSON.parse(result.json).returnData
     this.printTrades(updatedTrades)

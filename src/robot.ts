@@ -1,16 +1,11 @@
-import Console from './console'
-import { kingLogger, debugLogger } from './log'
+import KingLogger from './log'
 
 export default class Robot {
 
-  protected log: Function
-  protected console: Console
-  protected debugLogger: debugLogger
+  protected log: KingLogger
 
   constructor() {
-    this.log = kingLogger
-    this.console = new Console()
-    this.debugLogger = new debugLogger()
+    this.log = new KingLogger()
   }
 
 }

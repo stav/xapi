@@ -15,7 +15,7 @@ export default class StreamingApiRobot extends SocketApiRobot {
   private async tradeEvent (data: STREAMING_TRADE_RECORD): Promise<void> {
     this.printTrades([data])
     this.checkProfits(data)
-    this.log(data)
+    this.log.trade(data)
   }
 
 }

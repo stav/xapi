@@ -83,7 +83,7 @@ export async function checkProfits (this: KingBot, data: STREAMING_TRADE_RECORD)
     console.info('TAKE PROFIT', data)
     const trades: TRADE_RECORD[] = await this.getFamilyTrades(data) // TODO Make sure we don't include any pending orders
     if (trades.length > 0) {
-      await setFamilyStoploss(data, trades, this.xapi.Socket.send.tradeTransaction, this.console.error)
+      await setFamilyStoploss(data, trades, this.xapi.Socket.send.tradeTransaction, this.log.error)
     }
     await this.printAllTrades()
   }

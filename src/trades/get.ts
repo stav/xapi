@@ -9,7 +9,7 @@ import KingBot from '../kingbot'
  **/
 export async function getAllTrades (this: KingBot): Promise<TRADE_RECORD[]> {
   // Basic info already available in xapi.positions
-  const result = await this.xapi.Socket.send.getTrades().catch(this.console.error)
+  const result = await this.xapi.Socket.send.getTrades().catch(this.log.error)
   if (!result) {
     return []
   }
