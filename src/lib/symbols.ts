@@ -1,6 +1,6 @@
 import fs from 'fs'
 import { SYMBOL_RECORD } from 'xapi-node'
-import KingBot from './bot'
+import KingBot from '../bot'
 
 function doneWritingSymbols(symbolRecords: SYMBOL_RECORD[]): void {
   console.info(`${symbolRecords.length} symbols written`)

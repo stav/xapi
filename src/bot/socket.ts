@@ -1,4 +1,4 @@
-import { writeAllSymbols } from '../symbols'
+import { writeAllSymbols } from '../lib/symbols'
 import { buySellTip, buySellPrice } from '../orders'
 import {
   getFamilyTrades,
