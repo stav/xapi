@@ -1,4 +1,4 @@
-import StreamingApiRobot from './kingapistream'
+import StreamingApiRobot from './stream'
 
 const ctrlC = '\u0003'
 const ctrlD = '\u0004'

@@ -4,7 +4,7 @@ import {
   STREAMING_TRADE_RECORD,
 } from 'xapi-node'
 
-import KingBot from '../kingbot'
+import KingBot from '../bot'
 import getFamilyMaps from './getFamilyMaps'
 
 type TradeRecords = TRADE_RECORD[] | STREAMING_TRADE_RECORD[]

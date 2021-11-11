@@ -6,7 +6,7 @@ import {
   TradeStatus as TRADE_STATUS,
 } from 'xapi-node'
 
-import KingBot from '../kingbot'
+import KingBot from '../bot'
 
 interface EntryInfo {
   entry: number

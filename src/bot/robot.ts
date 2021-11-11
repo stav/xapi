@@ -1,4 +1,4 @@
-import KingLogger from './log'
+import KingLogger from '../log'
 
 export default class Robot {
 

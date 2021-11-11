@@ -1,6 +1,6 @@
 import { STREAMING_TRADE_RECORD } from 'xapi-node'
-import SocketApiRobot from './kingapisocket'
-import { checkProfits } from './profits'
+import { checkProfits } from '../profits'
+import SocketApiRobot from './socket'
 
 export default class StreamingApiRobot extends SocketApiRobot {
 

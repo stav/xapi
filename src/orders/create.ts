@@ -2,7 +2,7 @@ import {
   TRADE_TRANS_INFO,
  } from 'xapi-node'
 
-import KingBot from '../kingbot'
+import KingBot from '../bot'
 import getOrdersFromTip from './tip'
 import getOrdersFromPrice from './price'
 

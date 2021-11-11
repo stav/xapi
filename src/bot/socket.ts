@@ -1,13 +1,13 @@
-import XapiRobot from './xapirobot'
-import { writeAllSymbols } from './symbols'
-import { buySellTip, buySellPrice } from './orders'
+import { writeAllSymbols } from '../symbols'
+import { buySellTip, buySellPrice } from '../orders'
 import {
   getFamilyTrades,
   printAllTrades,
   getAllTrades,
   updateTrades,
   printTrades,
-} from './trades'
+} from '../trades'
+import XapiRobot from './xapirobot'
 
 export default class SocketApiRobot extends XapiRobot {
 
