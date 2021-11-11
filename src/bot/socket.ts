@@ -9,7 +9,9 @@ import {
 } from '../trades'
 import XapiRobot from './xapirobot'
 
-export default class SocketApiRobot extends XapiRobot {
+/** @name SocketApiRobot
+ **/
+export default class extends XapiRobot {
 
   protected buySellPrice: Function
   protected buySellTip: Function

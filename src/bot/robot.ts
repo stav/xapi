@@ -1,6 +1,8 @@
 import KingLogger from '../log'
 
-export default class Robot {
+/** @name Robot
+ **/
+export default class {
 
   protected log: KingLogger
 

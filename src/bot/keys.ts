@@ -8,7 +8,9 @@ type KeyMap = {
   [key: string]: () => void
 }
 
-export default class KeyedApiRobot extends StreamingApiRobot {
+/** @name KeyedApiRobot
+ **/
+export default class extends StreamingApiRobot {
 
   private _keyMap: KeyMap
 

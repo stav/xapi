@@ -7,7 +7,9 @@ import Robot from './robot'
 
 dotenv.config(); // loads .env into process.env
 
-export default class XapiRobot extends Robot {
+/** @name XapiRobot
+ **/
+export default class extends Robot {
 
   protected xapi: XAPI
 
