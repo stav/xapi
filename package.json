@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "test-det": "jest --detectOpenHandles",
-    "coverage": "jest --coverage"
+    "cov": "jest --coverage"
   },
   "author": "Steven Almeroth steve@primesite.dev",
   "license": "ISC",

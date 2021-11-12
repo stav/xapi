@@ -7,8 +7,7 @@ import {
 type TradeRecords = TRADE_RECORD[] | STREAMING_TRADE_RECORD[]
 type NumberMap = Map<number, Array<number>>
 type StringMap = Map<number, Array<string>>
-type FamilyMap = NumberMap | StringMap
-type FamilyMaps = [FamilyMap, FamilyMap, FamilyMap]
+type FamilyMaps = [NumberMap, StringMap, StringMap]
 
 /** @name getFamilyMaps
  **

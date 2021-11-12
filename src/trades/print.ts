@@ -15,8 +15,8 @@ function printFamilys(trades: TradeRecords): void {
     console.log('Familys', tpMap.size)
     // console.log('Familys', tpMap.size, tpMap, typeMap, symbolMap)
     for (const [key, tps] of tpMap) {
-      const symbols = [...symbolMap.get(key) as number[]]
-      const types = [...typeMap.get(key) as number[]]
+      const symbols = [...symbolMap.get(key) as string[]]
+      const types = [...typeMap.get(key) as string[]]
       console.log(' SL', key, types, symbols, 'TPs', tps)
     }
   }
@@ -31,7 +31,7 @@ export function printTrades (trades: TradeRecords): void {
     console.info(
       trades.length > 1 ? `${i+1}.` : '*.',
       'Order', trade.order, trade.order2, trade.position,
-      CMD_FIELD[trade.cmd], // type
+      CMD_FIELD[trade.cmd],
       trade.volume,
       trade.symbol,
       '@', trade.open_price,

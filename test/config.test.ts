@@ -14,14 +14,14 @@ describe("Config", () => {
   test("default", () => {
     const configs = config.util.loadFileConfigs()
 
-    expect(configs.Tip).not.toBeUndefined()
+    expect(configs.Tip).toBeDefined()
     expect(isTip(configs.Tip)).toBe(true)
 
-    expect(configs.Test).not.toBeUndefined()
-    expect(configs.Test.Assets).not.toBeUndefined()
+    expect(configs.Test).toBeDefined()
+    expect(configs.Test.Assets).toBeDefined()
     expect(nonAssets(configs.Test)).toHaveLength(0)
 
-    expect(configs.Update).not.toBeUndefined()
+    expect(configs.Update).toBeDefined()
     expect(configs.Update).toHaveProperty('entry')
   })
 
