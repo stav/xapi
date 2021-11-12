@@ -19,6 +19,7 @@ type FamilyMaps = [FamilyMap, FamilyMap, FamilyMap]
  **       the "customComment" field but unfortunately these fields are unreliable.
  **
  ** Example, the following nine (9) orders:
+ **
  **   1. Order 314327066 314307379 314327066 BUY GOLD @ 1782.07 SL 1765 TP 1797
  **   2. Order 314327067 314307378 314327067 BUY GOLD @ 1782.07 SL 1765 TP 1792
  **   3. Order 314327068 314307377 314327068 BUY GOLD @ 1782.07 SL 1765 TP 1789
@@ -29,7 +30,7 @@ type FamilyMaps = [FamilyMap, FamilyMap, FamilyMap]
  **   8. Order 314391977 314391977 314391977 SELL_STOP ETHEREUM @ 4200 SL 4800 TP 4150
  **   9. Order 314391978 314391978 314391978 SELL_STOP ETHEREUM @ 4200 SL 4800 TP 4160
  **
- ** Produce two (2) familys:
+ **   Produce two (2) familys:
  **
  **   SL 1765 ['BUY'] ['GOLD'] TPs [ 1784, 1786, 1789, 1792, 1797 ]
  **   SL 4800 ['SELL_STOP'] ['ETHEREUM'] TPs [ 4160, 4150, 4140, 4100 ]

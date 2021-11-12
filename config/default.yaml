@@ -27,6 +27,14 @@ Update:
   entry: 1825.8
   sl: 1833.8
 
+2021-11-12:
+  symbol: GOLD
+  type: SELL
+  entry: 1853
+  sl: 1863
+  tps: [ 1851, 1849, 1846, 1843, 1838 ]
+  volume: 1
+
 2021-11-09:
   symbol: GOLD
   type: SELL

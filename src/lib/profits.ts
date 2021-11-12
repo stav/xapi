@@ -10,7 +10,7 @@ import KingBot from '../bot'
 
 type UpdateOrderEvent = Partial<TRADE_TRANS_INFO>
 
-function _isBuyOrder(cmd: number): boolean {
+function isBuyOrder(cmd: number): boolean {
   return ['BUY', 'BUY_LIMIT', 'BUY_STOP'].includes(CMD_FIELD[cmd])
 }
 
@@ -33,24 +33,24 @@ function _isBuyOrder(cmd: number): boolean {
  **   to the average of the open & close prices
  **/
 function getLevel(data: STREAMING_TRADE_RECORD): number {
-  const isBuyOrder = _isBuyOrder(data.cmd)
+  const _isBuyOrder = isBuyOrder(data.cmd)
   function stoplossWorseThanEntry(): boolean {
-    return isBuyOrder ? data.sl < data.open_price : data.sl > data.open_price
+    return _isBuyOrder ? data.sl < data.open_price : data.sl > data.open_price
   }
   if (stoplossWorseThanEntry()) {
     return data.open_price
   }
-  return (data.open_price + data.close_price) / 2
+  const level = (data.open_price + data.close_price) / 2
+  console.info('LEVEL', level, '=', data.open_price, '+', data.close_price, '/', 2)
+  return level
 }
 
 /** @name getStopLoss
  **/
 function getStopLoss(data: STREAMING_TRADE_RECORD): number {
-  const margin = data.open_price * 0.0003
-  const isBuyOrder = _isBuyOrder(data.cmd)
-  const betterment = isBuyOrder ? +margin : -margin
   const level = getLevel(data) // (data.open_price + data.close_price) / 2
-  console.info('LEVEL', level, '=', data.open_price, '+', data.close_price, '/', 2)
+  const margin = data.open_price * 0.0003
+  const betterment = isBuyOrder(data.cmd) ? +margin : -margin
   const stopLoss = +(level + betterment).toFixed(data.digits)
   console.info('STOP LOSS:', stopLoss, '=', level, '+', betterment)
   return stopLoss
