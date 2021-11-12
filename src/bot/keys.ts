@@ -22,7 +22,7 @@ export default class extends StreamingApiRobot {
     this._keyMap = {
       [ctrlC]: function Disconnect() { this.disconnect       () },
       [ctrlD]: function Disconnect() { this.disconnect       () },
-       //  1 : function _ () { },
+           1 : function Connect   () { this.connect          () },
        //  2 : function _ () { },
            3 : function Trade_Tip () { this.buySellTip       () },
            4 : function Trade_Prc () { this.buySellPrice     () },

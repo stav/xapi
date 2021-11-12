@@ -13,31 +13,38 @@ export default class extends Robot {
 
   protected xapi: XAPI
 
-  constructor() {
-    super()
-    this.xapi = this.connection()
-    this.xapi.logger.onStream('debug', this.log.debug)
+  private defaultConfig = {
+    accountId: process.env.ACCOUNTID || '',
+    password: process.env.PASSWORD || '',
+    host: 'ws.xtb.com', // only for XTB accounts
+    type: 'demo',
   }
 
-  connection(): XAPI {
-    const xapi = new XAPI({
-      accountId: process.env.ACCOUNTID || '',
-      password: process.env.PASSWORD || '',
-      host: 'ws.xtb.com', // only for XTB accounts
-      type: 'demo',
-    })
-    xapi.connect()
-    xapi.onReady(() => this.main())
-    xapi.onReject(console.error)
-    return xapi
-   }
+  constructor() {
+    super()
+    this.xapi = new XAPI(this.defaultConfig)
+    this.xapi.logger.onStream('debug', this.log.debug)
+    this.main()
+  }
 
   main (): void {
-    console.info('Socket is:', this.socketStatus())
+    this.printStatus()
   }
 
   private socketStatus(): string {
     return ConnectionStatus[this.xapi.Socket.status]
+  }
+
+  private printStatus() {
+    console.info('Socket is:', this.socketStatus())
+  }
+
+  connect (): void {
+    console.info('Connecting socket')
+    this.xapi.connect()
+    this.xapi.onReject(console.error)
+    this.xapi.onConnectionChange(this.printStatus.bind(this))
+    // this.xapi.onReady(() => {})
   }
 
   async disconnect (): Promise<void> {
