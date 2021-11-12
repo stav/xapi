@@ -22,7 +22,7 @@ export async function getAllTrades (this: KingBot): Promise<TRADE_RECORD[]> {
 export async function getFamilyTrades (this: KingBot, data: STREAMING_TRADE_RECORD): Promise<TRADE_RECORD[]> {
   let trades: TRADE_RECORD[] = await this.getAllTrades()
   trades = trades.filter((trade: TRADE_RECORD) => trade.sl === data.sl)
-  console.log('Family trades', trades.length)
+  this.log.info('Family trades', trades.length)
   this.printTrades(trades)
   return trades
 }

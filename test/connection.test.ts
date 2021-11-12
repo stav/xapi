@@ -1,6 +1,6 @@
 import K1NG from '../src/bot'
 
-describe("WebSocket Server", () => {
+describe("Connection", () => {
 
   let king: K1NG
 
@@ -8,8 +8,8 @@ describe("WebSocket Server", () => {
     king = new K1NG()
   })
 
-  afterAll(() => {
-    king.disconnect()
+  afterAll(async () => {
+    await king.disconnect()
   })
 
   test("Check the node env", () => {

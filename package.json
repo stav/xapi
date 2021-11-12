@@ -5,6 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "test": "jest",
+    "test-det": "jest --detectOpenHandles",
     "coverage": "jest --coverage"
   },
   "author": "Steven Almeroth steve@primesite.dev",

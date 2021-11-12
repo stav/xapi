@@ -1,8 +1,12 @@
 import KingLogger from '../log'
-import { getFamilyTrades } from '../trades'
+import {
+  getAllTrades,
+  getFamilyTrades,
+ } from '../trades'
 
 interface TestingApi {
   getFamilyTrades: Function
+  getAllTrades: Function
 }
 
 /** @name Robot
@@ -16,6 +20,7 @@ export default class {
   constructor() {
     this.testing = {
       getFamilyTrades,
+      getAllTrades,
     }
     this.log = new KingLogger()
   }

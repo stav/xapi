@@ -63,12 +63,14 @@ export default class extends Robot {
   }
 
   async disconnect (): Promise<void> {
-    !this.isTestMode && console.log('Exit')
+    if (!this.isTestMode) {
+      console.log('Exit')
+      process.stdin.pause()
+      this.isConnected && process.stdout.write('disconnecting... ')
+    }
     if (this.isConnected) {
-      process.stdout.write('disconnecting... ')
       await this.xapi.disconnect()
     }
-    process.stdin.pause()
   }
 
 }

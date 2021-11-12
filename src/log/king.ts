@@ -17,8 +17,16 @@ export default class {
   }
 
   error(e?: unknown, ...optionalParams: any[]): void {
-    logErrorToConsole(e, optionalParams)
-    logErrorToFile(e, optionalParams)
+    if (process.env.NODE_ENV !== 'test') {
+      logErrorToConsole(e, optionalParams)
+      logErrorToFile(e, optionalParams)
+    }
+  }
+
+  info(...message: any[]) {
+    if (process.env.NODE_ENV !== 'test') {
+      console.info(...message)
+    }
   }
 
 }
