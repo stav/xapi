@@ -3,7 +3,7 @@ declare global {
     interface ProcessEnv {
       ACCOUNTID: string;
       PASSWORD: string;
-      NODE_ENV: 'development' | 'production';
+      NODE_ENV: 'test' | 'development' | 'production';
     }
   }
 }

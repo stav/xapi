@@ -5,7 +5,7 @@ import { ConnectionStatus } from 'xapi-node'
 
 import Robot from './robot'
 
-dotenv.config(); // loads .env into process.env
+dotenv.config() // loads .env into process.env
 
 /** @name XapiRobot
  **/
@@ -31,28 +31,44 @@ export default class extends Robot {
     this.printStatus()
   }
 
-  private socketStatus(): string {
-    return ConnectionStatus[this.xapi.Socket.status]
+  private printStatus(status?: string | number) {
+    if (this.isTestMode) {
+      return
+    }
+    if (status === undefined) {
+      status = this.xapi.Socket.status
+    }
+    if (typeof status === 'number') {
+      status = ConnectionStatus[status]
+    }
+    console.info('Socket is:', status)
   }
 
-  private printStatus() {
-    console.info('Socket is:', this.socketStatus())
+  get isConnected(): Boolean {
+    return this.xapi.Socket.status === ConnectionStatus.CONNECTED
   }
 
-  connect (): void {
-    console.info('Connecting socket')
-    this.xapi.connect()
+  connect (readyCallback: ()=>void = ()=>{}): void {
+    if (this.isConnected) {
+      this.printStatus()
+      return
+    }
+    if (!this.isTestMode) {
+      console.info('Connecting socket')
+    }
+    this.xapi.connect().catch(console.error)
     this.xapi.onReject(console.error)
     this.xapi.onConnectionChange(this.printStatus.bind(this))
-    // this.xapi.onReady(() => {})
+    this.xapi.onReady(readyCallback)
   }
 
   async disconnect (): Promise<void> {
-    process.stdout.write('disconnecting... ')
-    await this.xapi.disconnect()
-    process.stdout.write(this.socketStatus())
-    process.stdout.write('\n')
-    process.exit();
+    !this.isTestMode && console.log('Exit')
+    if (this.isConnected) {
+      process.stdout.write('disconnecting... ')
+      await this.xapi.disconnect()
+    }
+    process.stdin.pause()
   }
 
 }
