@@ -68,3 +68,15 @@ export default async function (getTickPrices: Function, error: Function): Promis
   }
   return orders
 }
+
+function isAsset(object: unknown): object is Asset {
+  return Object.prototype.hasOwnProperty.call(object, 'symbol')
+}
+
+const testing = {
+  isAsset,
+}
+
+export {
+  testing
+}

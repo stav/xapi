@@ -33,3 +33,20 @@ export default function (): TRADE_TRANS_INFO[] {
     customComment: 'K1NGbot ' + timestamp + ' TP' + ++tpLevel,
   }))
 }
+
+function isTip(object: unknown): object is Tip {
+  return Object.prototype.hasOwnProperty.call(object, 'symbol')
+      && Object.prototype.hasOwnProperty.call(object, 'entry')
+      && Object.prototype.hasOwnProperty.call(object, 'sl')
+      && Object.prototype.hasOwnProperty.call(object, 'tps')
+      && Object.prototype.hasOwnProperty.call(object, 'type')
+      && Object.prototype.hasOwnProperty.call(object, 'volume')
+}
+
+const testing = {
+  isTip,
+}
+
+export {
+  testing
+}
