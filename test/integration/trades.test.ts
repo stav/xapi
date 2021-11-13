@@ -1,6 +1,6 @@
 import { TRADE_RECORD } from 'xapi-node'
 
-import K1NG from '../src/bot'
+import K1NG from '../../src/bot'
 
 jest.setTimeout(7 * 1000)
 

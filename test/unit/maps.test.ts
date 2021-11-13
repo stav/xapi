@@ -1,6 +1,6 @@
 import { TRADE_RECORD } from 'xapi-node'
 
-import getFamilyMaps from "../src/trades/getFamilyMaps"
+import getFamilyMaps from "../../src/trades/getFamilyMaps"
 
 type NumberMap = Map<number, Array<number>>
 type StringMap = Map<number, Array<string>>

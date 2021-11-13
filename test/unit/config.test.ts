@@ -1,6 +1,6 @@
 import config from 'config'
-import { testing as tip } from '../src/orders/tip'
-import { testing as price } from '../src/orders/price'
+import { testing as tip } from '../../src/orders/tip'
+import { testing as price } from '../../src/orders/price'
 
 const { isTip } = tip
 const { isAsset } = price

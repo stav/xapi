@@ -1,4 +1,4 @@
-import K1NG from '../src/bot'
+import K1NG from '../../src/bot'
 
 describe("Connection", () => {
 
