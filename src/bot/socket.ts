@@ -9,6 +9,11 @@ import {
 } from '../trades'
 import XapiRobot from './xapirobot'
 
+interface TestingApi {
+  getFamilyTrades: Function
+  getAllTrades: Function
+}
+
 /** @name SocketApiRobot
  **/
 export default class extends XapiRobot {
@@ -22,8 +27,11 @@ export default class extends XapiRobot {
   protected updateTrades: Function
   protected writeAllSymbols: Function
 
+  testing: TestingApi
+
   constructor() {
     super()
+
     this.buySellPrice = buySellPrice
     this.buySellTip = buySellTip
     this.getAllTrades = getAllTrades
@@ -32,6 +40,11 @@ export default class extends XapiRobot {
     this.printTrades = printTrades
     this.updateTrades = updateTrades
     this.writeAllSymbols = writeAllSymbols
+
+    this.testing = {
+      getFamilyTrades,
+      getAllTrades,
+    }
   }
 
 }
