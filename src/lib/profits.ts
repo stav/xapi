@@ -18,19 +18,18 @@ function isBuyOrder(cmd: number): boolean {
  **
  ** This function makes the initial take-profit a little less conservative
  **
- ** The `level` in `getStopLoss` could just be the avg of open & close
- ** but if we are closing TP1 then make the break-even only just better
- ** than the entry price.
+ ** The `level` in `getStopLoss` could just be the avg of open & close but if
+ ** we are closing TP1 then make the break-even only just better than the entry
+ ** price.
  **
- ** @todo If somehow the bot misses the break-even from TP1
- **   When we see the next take-profit, let's say TP2
- **   it will set the SL to the entry price instead of where it should be:
- **   halfway between Open & TP2)
+ ** @todo If somehow the bot misses the break-even from TP1. When we see the
+ **   next take-profit, let's say TP2 it will set the SL to the entry price
+ **   instead of where it should be (halfway between Open & TP2).
  **
  ** @note Technically, the stop loss should, except for TP1, be moved to the
  **   previous TP level; but, since we don't have get any meta-data about other
  **   orders when we close a TP, the current implementation just sets the SL
- **   to the average of the open & close prices
+ **   to the average of the open & close prices.
  **/
 function getLevel(data: STREAMING_TRADE_RECORD): number {
   const _isBuyOrder = isBuyOrder(data.cmd)
