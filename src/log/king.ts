@@ -4,7 +4,7 @@ import { logErrorToConsole, logErrorToFile } from './error'
 
 /** @name KingLogger
  **/
-export default class {
+export default class Logger {
 
   debug: DebugLogger
 
@@ -24,6 +24,10 @@ export default class {
   }
 
   info(...message: any[]) {
+    Logger.sinfo(...message)
+  }
+
+  static sinfo(...message: any[]) {
     if (process.env.NODE_ENV !== 'test') {
       console.info(...message)
     }

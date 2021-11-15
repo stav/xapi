@@ -6,6 +6,7 @@ import {
   STREAMING_TRADE_RECORD,
 } from 'xapi-node'
 
+import Logger from "../log/king"
 import KingBot from '../bot'
 
 type UpdateOrderEvent = Partial<TRADE_TRANS_INFO>
@@ -40,7 +41,7 @@ function getLevel(data: STREAMING_TRADE_RECORD): number {
     return data.open_price
   }
   const level = (data.open_price + data.close_price) / 2
-  console.info('LEVEL', level, '=', data.open_price, '+', data.close_price, '/', 2)
+  Logger.sinfo('LEVEL', level, '=', data.open_price, '+', data.close_price, '/', 2)
   return level
 }
 
@@ -48,10 +49,10 @@ function getLevel(data: STREAMING_TRADE_RECORD): number {
  **/
 function getStopLoss(data: STREAMING_TRADE_RECORD): number {
   const level = getLevel(data) // (data.open_price + data.close_price) / 2
-  const margin = data.open_price * 0.0003
+  const margin = level * 0.0003
   const betterment = isBuyOrder(data.cmd) ? +margin : -margin
   const stopLoss = +(level + betterment).toFixed(data.digits)
-  console.info('STOP LOSS:', stopLoss, '=', level, '+', betterment)
+  Logger.sinfo('STOP LOSS:', stopLoss, '=', level, '+', betterment)
   return stopLoss
 }
 
@@ -86,4 +87,14 @@ export async function checkProfits (this: KingBot, data: STREAMING_TRADE_RECORD)
     }
     await this.printAllTrades()
   }
+}
+
+const testing = {
+  getStopLoss,
+  isBuyOrder,
+  getLevel,
+}
+
+export {
+  testing
 }
