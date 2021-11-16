@@ -8,6 +8,8 @@ type KeyMap = {
   [key: string]: () => void
 }
 
+/** @name KeyedApiRobot
+ **/
 export default class KeyedApiRobot extends StreamingApiRobot {
 
   private _keyMap: KeyMap
@@ -20,7 +22,7 @@ export default class KeyedApiRobot extends StreamingApiRobot {
     this._keyMap = {
       [ctrlC]: function Disconnect() { this.disconnect       () },
       [ctrlD]: function Disconnect() { this.disconnect       () },
-       //  1 : function _ () { },
+           1 : function Connect   () { this.connect          () },
        //  2 : function _ () { },
            3 : function Trade_Tip () { this.buySellTip       () },
            4 : function Trade_Prc () { this.buySellPrice     () },
@@ -52,6 +54,18 @@ export default class KeyedApiRobot extends StreamingApiRobot {
     }
   }
 
+  /** @name _printKeys
+   **
+   ** "?" does nothing
+   ** "1" Connect
+   ** "3" Trade_Tip
+   ** "4" Trade_Prc
+   ** "5" Update
+   ** "6" Positions
+   ** "9" Symbols
+   ** "\u0003" Disconnect
+   ** "\u0004" Disconnect
+   **/
   private _printKeys(): void {
     process.stdout.write('does nothing\n')
     for (const _ in this._keyMap) {

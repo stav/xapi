@@ -9,6 +9,8 @@ import {
 } from '../trades'
 import XapiRobot from './xapirobot'
 
+/** @name SocketApiRobot
+ **/
 export default class SocketApiRobot extends XapiRobot {
 
   protected buySellPrice: Function
@@ -22,6 +24,7 @@ export default class SocketApiRobot extends XapiRobot {
 
   constructor() {
     super()
+
     this.buySellPrice = buySellPrice
     this.buySellTip = buySellTip
     this.getAllTrades = getAllTrades
@@ -30,6 +33,11 @@ export default class SocketApiRobot extends XapiRobot {
     this.printTrades = printTrades
     this.updateTrades = updateTrades
     this.writeAllSymbols = writeAllSymbols
+
+    this.printTrades = this.printTrades.bind(this)
+
+    this.testing.getFamilyTrades = getFamilyTrades
+    this.testing.getAllTrades = getAllTrades
   }
 
 }

@@ -1,10 +1,11 @@
 import DebugLogger from './debug'
 import { logTradeToFile, TradeRecord } from './trade'
+import { logInfoToConsole, logInfoToFile } from './info'
 import { logErrorToConsole, logErrorToFile } from './error'
 
 /** @name KingLogger
  **/
-export default class {
+export default class Logger {
 
   debug: DebugLogger
 
@@ -12,13 +13,32 @@ export default class {
     this.debug = new DebugLogger()
   }
 
-  trade(trade: TradeRecord): void {
-    logTradeToFile(trade)
+  static info(...messages: any[]) {
+    if (process.env.NODE_ENV === 'test') {
+      logInfoToFile(...messages)
+    }
+    else {
+      logInfoToConsole(...messages)
+    }
+  }
+
+  static error(e?: unknown, ...optionalParams: any[]): void {
+    logErrorToFile(e, optionalParams)
+    if (process.env.NODE_ENV !== 'test') {
+      logErrorToConsole(e, optionalParams)
+    }
+  }
+
+  info(...messages: any[]) {
+    Logger.info(...messages)
   }
 
   error(e?: unknown, ...optionalParams: any[]): void {
-    logErrorToConsole(e, optionalParams)
-    logErrorToFile(e, optionalParams)
+    Logger.error(e, ...optionalParams)
+  }
+
+  trade(trade: TradeRecord): void {
+    logTradeToFile(trade)
   }
 
 }

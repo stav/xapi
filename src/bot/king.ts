@@ -2,7 +2,7 @@ import KeyedApiRobot from './keys'
 
 /** @name KingBot
  **/
-export default class extends KeyedApiRobot {
+export default class KingBot extends KeyedApiRobot {
 
   constructor() {
     super()
@@ -10,10 +10,12 @@ export default class extends KeyedApiRobot {
 
   main (): void {
     super.main()
-    process.stdin.setEncoding('utf8')
-    process.stdin.setRawMode(true) // false sends chunk after enter is pressed
-    process.stdin.resume() // running in parent process event loop
-    process.stdin.on('data', this.stdIn.bind(this))
+    if (!this.isTestMode) {
+      process.stdin.setEncoding('utf8')
+      process.stdin.setRawMode(true) // false sends chunk after enter is pressed
+      process.stdin.resume() // running in parent process event loop
+      process.stdin.on('data', this.stdIn.bind(this))
+    }
   }
 
 }

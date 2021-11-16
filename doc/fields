@@ -4,10 +4,27 @@ type
 
     Possible values of `type` field:
 
-    name    value   description
+    NAME    VALUE   DESCRIPTION
 
     OPEN      0    order open, used for opening orders
     PENDING   1    order pending, only used in the streaming getTrades command
     CLOSE     2    order close
     MODIFY    3    order modify, only used in the tradeTransaction command
     DELETE    4    order delete, only used in the tradeTransaction command
+
+cmd
+
+    http://developers.xstore.pro/documentation/#cmd
+
+    Possible values of `cmd` field:
+
+    NAME       VALUE   DESCRIPTION
+
+    BUY          0     Buy
+    SELL         1     Sell
+    BUY_LIMIT    2     Buy Limit
+    SELL_LIMIT   3     Sell Limit
+    BUY_STOP     4     Buy Stop
+    SELL_STOP    5     Sell Stop
+    BALANCE      6     (read only) Used in getTradesHistory for manager's deposit/withdrawal operations (profit>0 for deposit, profit<0 for withdrawal)
+    CREDIT       7     (read only)
