@@ -23,10 +23,11 @@ export default class Logger {
   }
 
   static error(e?: unknown, ...optionalParams: any[]): void {
-    logErrorToConsole(e, optionalParams)
     logErrorToFile(e, optionalParams)
+    if (process.env.NODE_ENV !== 'test') {
+      logErrorToConsole(e, optionalParams)
+    }
   }
-
 
   info(...messages: any[]) {
     Logger.info(...messages)
