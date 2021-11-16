@@ -9,7 +9,7 @@ dotenv.config() // loads .env into process.env
 
 /** @name XapiRobot
  **/
-export default class extends Robot {
+export default class XapiRobot extends Robot {
 
   protected xapi: XAPI
 
@@ -18,6 +18,7 @@ export default class extends Robot {
     password: process.env.PASSWORD || '',
     host: 'ws.xtb.com', // only for XTB accounts
     type: 'demo',
+    appName: 'K1NGbot',
   }
 
   constructor() {

@@ -2,7 +2,7 @@ import KingLogger from '../log'
 
 /** @name Robot
  **/
-export default class {
+export default class Robot {
 
   protected log: KingLogger
 

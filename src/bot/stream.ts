@@ -4,7 +4,7 @@ import SocketApiRobot from './socket'
 
 /** @name StreamingApiRobot
  **/
-export default class extends SocketApiRobot {
+export default class StreamingApiRobot extends SocketApiRobot {
 
   protected checkProfits: Function
 

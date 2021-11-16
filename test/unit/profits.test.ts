@@ -1,4 +1,3 @@
-import exp from 'constants'
 import {
   CMD_FIELD,
   STREAMING_TRADE_RECORD,

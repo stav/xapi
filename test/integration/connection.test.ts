@@ -12,12 +12,9 @@ describe("Connection", () => {
     await king.disconnect()
   })
 
-  test("Check the node env", () => {
-    expect(king.isTestMode).toBe(true)
-  })
-
   test("Check the startup bot status", () => {
     expect(king.isConnected).toBe(false)
+    expect(king.isTestMode).toBe(true)
   })
 
   test('Check the connected bot status', done => {

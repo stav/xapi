@@ -10,7 +10,7 @@ type KeyMap = {
 
 /** @name KeyedApiRobot
  **/
-export default class extends StreamingApiRobot {
+export default class KeyedApiRobot extends StreamingApiRobot {
 
   private _keyMap: KeyMap
 

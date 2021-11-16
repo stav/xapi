@@ -2,7 +2,7 @@ import KeyedApiRobot from './keys'
 
 /** @name KingBot
  **/
-export default class extends KeyedApiRobot {
+export default class KingBot extends KeyedApiRobot {
 
   constructor() {
     super()

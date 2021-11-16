@@ -24,7 +24,7 @@ export async function logErrorToConsole (_e: unknown, ...data: any[]): Promise<v
   console.error('ERROR:', message.replace(/^[\s|]+/, ''), ...data)
 }
 
-export function logErrorToFile (e: unknown, optionalParams: any[]): void {
+export function logErrorToFile (e: unknown, ...optionalParams: any[]): void {
   try {
     const json = JSON.stringify([e, ...optionalParams]) + '\n'
     fs.appendFile('./log/error', json, ()=>{})

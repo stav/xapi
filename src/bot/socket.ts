@@ -16,7 +16,7 @@ interface TestingApi {
 
 /** @name SocketApiRobot
  **/
-export default class extends XapiRobot {
+export default class SocketApiRobot extends XapiRobot {
 
   protected buySellPrice: Function
   protected buySellTip: Function
