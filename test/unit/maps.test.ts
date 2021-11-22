@@ -54,21 +54,21 @@ describe("Maps", () => {
   })
 
   test("Check family maps tps", () => {
-    expect(tpsMap.get(3.14)).toStrictEqual<Array<number>>([2.9, 2.8, 2.7])
-    expect(tpsMap.get(1800)).toStrictEqual<Array<number>>([1810, 1820])
-    expect(tpsMap.get(1899)).toStrictEqual<Array<number>>([1830])
+    expect(tpsMap.get(3.14)).toStrictEqual<number[]>([2.9, 2.8, 2.7])
+    expect(tpsMap.get(1800)).toStrictEqual<number[]>([1810, 1820])
+    expect(tpsMap.get(1899)).toStrictEqual<number[]>([1830])
   })
 
   test("Check family maps type", () => {
-    expect(typMap.get(3.14)).toStrictEqual<Array<string>>(['SELL_LIMIT'])
-    expect(typMap.get(1800)).toStrictEqual<Array<string>>(['BUY'])
-    expect(typMap.get(1899)).toStrictEqual<Array<string>>(['BUY'])
+    expect(typMap.get(3.14)).toStrictEqual<string[]>(['SELL_LIMIT'])
+    expect(typMap.get(1800)).toStrictEqual<string[]>(['BUY'])
+    expect(typMap.get(1899)).toStrictEqual<string[]>(['BUY'])
   })
 
   test("Check family maps symbol", () => {
-    expect(symMap.get(3.14)).toStrictEqual<Array<string>>(['PIES'])
-    expect(symMap.get(1800)).toStrictEqual<Array<string>>(['GOLD'])
-    expect(symMap.get(1899)).toStrictEqual<Array<string>>(['GOLD'])
+    expect(symMap.get(3.14)).toStrictEqual<string[]>(['PIES'])
+    expect(symMap.get(1800)).toStrictEqual<string[]>(['GOLD'])
+    expect(symMap.get(1899)).toStrictEqual<string[]>(['GOLD'])
   })
 
 })

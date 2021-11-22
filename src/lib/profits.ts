@@ -6,8 +6,8 @@ import {
   STREAMING_TRADE_RECORD,
 } from 'xapi-node'
 
-import Logger from "../log/king"
 import KingBot from '../bot'
+import Logger from "../log"
 
 type UpdateOrderEvent = Partial<TRADE_TRANS_INFO>
 
