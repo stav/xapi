@@ -26,7 +26,7 @@ describe("Connection", () => {
         done(error)
       }
     }
-    king.connect(callback)
+    king.connect_xapi(callback)
   })
 
 })

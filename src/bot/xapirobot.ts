@@ -3,13 +3,13 @@ import dotenv from 'dotenv'
 import XAPI from 'xapi-node'
 import { ConnectionStatus } from 'xapi-node'
 
-import Robot from './robot'
+import TelegramApiRobot from './telegrama'
 
 dotenv.config() // loads .env into process.env
 
 /** @name XapiRobot
  **/
-export default class XapiRobot extends Robot {
+export default class XapiRobot extends TelegramApiRobot {
 
   protected xapi: XAPI
 
@@ -49,7 +49,7 @@ export default class XapiRobot extends Robot {
     return this.xapi.Socket.status === ConnectionStatus.CONNECTED
   }
 
-  connect (readyCallback: ()=>void = ()=>{}): void {
+  connect_xapi (readyCallback: ()=>void = ()=>{}): void {
     if (this.isConnected) {
       this.printStatus()
       return
@@ -64,8 +64,8 @@ export default class XapiRobot extends Robot {
   }
 
   async disconnect (): Promise<void> {
+    super.disconnect()
     if (!this.isTestMode) {
-      console.log('Exit')
       process.stdin.pause()
       this.isConnected && process.stdout.write('disconnecting... ')
     }
