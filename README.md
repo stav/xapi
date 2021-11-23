@@ -30,12 +30,12 @@ in the "family".
 
 _A family is a group of orders all with the exact same stop loss._
 
-### Break-even
+### Break-even Stop Loss
 
 When the first TP level is reached the stop loss moves to 0.03% better than the
 open price.
 
-### Better Take Profit Levels
+### Trailing Stop Loss
 
 When TP2 is reached the bot moves to halfway between the open-price and the
 close-price for this order.
@@ -90,7 +90,17 @@ Then TP3 (the last order) does not move any stop loss.
 
     $ pnpm tsc && node dist/index.js
 
+    Socket is: DISCONNECTED
+
+    "1" Connecting socket
     Socket is: CONNECTED
+
+    "2" Connecting Telegram
+    [2021-11-24T05:21:21.550Z] [INFO] - [Running gramJS version 1.10.8]
+    [2021-11-24T05:21:21.552Z] [INFO] - [Connecting to 149.154.175.52:80/TCPFull...]
+    [2021-11-24T05:21:21.608Z] [INFO] - [Connection to 149.154.175.52:80/TCPFull complete!]
+    Logged in as 12345 Brandon (PipsJammer)
+    Listening 11 [ 23456, -10034567 ] -10034567
 
     *. Order 313400349 313384466 313400349 SELL BITCOIN @ 61992.25 SL 62700 TP 61937.48 profit=-109.82
 
@@ -104,13 +114,15 @@ Then TP3 (the last order) does not move any stop loss.
     3. Order 312609757 312609757 312609757 SELL_STOP BITCOIN @ 60300 sl=60666
 
     "6" Printing positions
-    1. Order 313400349 313384466 313400349 SELL BITCOIN @ 61992.25 SL 62700 TP 61937.48 profit=-163.4
-    2. Order 313402992 313401742 313402992 BUY BITCOIN @ 62200.81 SL 61000 TP 63200 profit=-192.87 "x163527755480500470"
-    3. Order 313400348 313384467 313400348 SELL BITCOIN @ 61992.25 SL 62700 TP 61748.31 profit=-163.4
-    4. Order 313402994 313401744 313402994 BUY BITCOIN @ 62200.81 SL 61000 TP 63300 profit=-192.87 "x163527755504800480"
-    5. Order 313402993 313401741 313402993 BUY BITCOIN @ 62200.81 SL 61000 TP 62286.86 profit=-192.87
+    1. Order 313400349 313384466 313400349 SELL BITCOIN @ 61992.25 SL 62700 TP 61937.48
+    2. Order 313402992 313401742 313402992 BUY BITCOIN @ 62200.81 SL 61000 TP 63200
+    3. Order 313400348 313384467 313400348 SELL BITCOIN @ 61992.25 SL 62700 TP 61748.31
+    4. Order 313402994 313401744 313402994 BUY BITCOIN @ 62200.81 SL 61000 TP 63300
+    5. Order 313402993 313401741 313402993 BUY BITCOIN @ 62200.81 SL 61000 TP 62286.86
 
     "?" does nothing
+    "1" Connect_XA
+    "2" Connect_Te
     "3" Trade_Tip
     "4" Trade_Prc
     "5" Update
@@ -119,6 +131,9 @@ Then TP3 (the last order) does not move any stop loss.
     "\u0003" Disconnect
     "\u0004" Disconnect
 
-    "\u0004" disconnecting... DISCONNECTED
+    "\u0004" Exit
+    disconnecting... Socket is: DISCONNECTED
+    [2021-11-24T05:40:06.283Z] [INFO] - [Disconnecting from 149.154.175.52:80/TCPFull...]
+    [2021-11-24T05:40:06.285Z] [INFO] - [connection closed]
 
 works with live socket at <https://xs5.xopenhub.pro/xoh>
