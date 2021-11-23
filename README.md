@@ -86,6 +86,23 @@ Then TP3 (the last order) does not move any stop loss.
     cd xapi
     pnpm install
 
+### Configuration
+
+Create a file called `config/local.yaml` with the following fields but with your
+real information:
+
+    Telegram:
+        accountId: 12345
+        password: xoh23456
+        token: 34567:aAbBcC
+        apiId: 45678
+        apiHash: aA1bB2cC3
+        session: ""
+        chat: 56789
+        chats:
+          - 56789
+          - -10067890
+
 ## Usage
 
     $ pnpm tsc && node dist/index.js

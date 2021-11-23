@@ -1,12 +1,10 @@
 import { StringSession } from 'telegram/sessions'
-import dotenv from 'dotenv'
-
-dotenv.config() // loads .env into process.env
+import config from 'config'
 
 export default {
-  token: process.env.TOKEN,
-  apiId: +(process.env.APIID || 0),
-  apiHash: process.env.APIHASH || '',
-  session: new StringSession(process.env.SESSION),
+  token: config.get('Telegram.token'),
+  apiId: +(config.get('Telegram.apiId') as number),
+  apiHash: config.get('Telegram.apiHash') as string,
+  session: new StringSession(config.get('Telegram.session')),
   config: { connectionRetries: 5 },
 }

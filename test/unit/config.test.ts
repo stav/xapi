@@ -12,17 +12,21 @@ function nonAssets(test: any): Array<any> {
 describe("Config", () => {
 
   test("default", () => {
-    const configs = config.util.loadFileConfigs()
 
-    expect(configs.Tip).toBeDefined()
-    expect(isTip(configs.Tip)).toBe(true)
+    const Tip = config.get('Tip')
+    expect(Tip).toBeDefined()
+    expect(isTip(Tip)).toBe(true)
 
-    expect(configs.Test).toBeDefined()
-    expect(configs.Test.Assets).toBeDefined()
-    expect(nonAssets(configs.Test)).toHaveLength(0)
+    const Hedge = config.get('Hedge')
+    const Assets = config.get('Hedge.Assets')
+    expect(Hedge).toBeDefined()
+    expect(Assets).toBeDefined()
+    expect(nonAssets(Hedge)).toHaveLength(0)
 
-    expect(configs.Update).toBeDefined()
-    expect(configs.Update).toHaveProperty('entry')
+    const Update = config.get('Update')
+    expect(Update).toBeDefined()
+    expect(Update).toHaveProperty('entry')
+
   })
 
 })

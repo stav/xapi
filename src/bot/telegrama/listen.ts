@@ -1,15 +1,12 @@
 import { NewMessage } from 'telegram/events'
-import dotenv from 'dotenv'
+import config from 'config'
 
 import Logger from '../../log'
-
 import KingBot from '../king'
 
-import chats from './chats'
-
-dotenv.config() // loads .env into process.env
-
 const re = /XAUUSD (?<type>BUY|SELL)\s+ENTRADA: (?<entry>[\d.]+)\s+SL: (?<sl>[\d.]+)\s+(?<tps>.+)/s
+
+const chats = config.get('Telegram.chats') as number[]
 
 /** @name parseMessageForSignal
  **
@@ -50,7 +47,7 @@ async function handler(kingbot: KingBot, event: any) {
     const sender = await m.getSender()
     const name = sender.username || sender.title
     const date = new Date(m.date * 1000)
-    const targetChatId = +(process.env.CHAT || 0)
+    const targetChatId = +(config.get('Telegram.chat') as string)
     Logger.info(event.chatId, date, name, '|', message)
     if (event.chatId === targetChatId) {
       let signal
@@ -75,6 +72,6 @@ export default async function (kingbot: KingBot, client: any) {
   Logger.info('Logged in as', me.id, me.firstName, username, client.session.save())
 
   client.addEventHandler((event: any) => handler(kingbot, event), new NewMessage({ chats }))
-  Logger.info('Listening', chats.length, chats)
+  Logger.info('Listening', chats.length, chats, config.get('Telegram.chat'))
 
 }

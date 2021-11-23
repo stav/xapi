@@ -1,11 +1,8 @@
-import dotenv from 'dotenv'
-
 import XAPI from 'xapi-node'
 import { ConnectionStatus } from 'xapi-node'
+import config from 'config'
 
 import TelegramApiRobot from './telegrama'
-
-dotenv.config() // loads .env into process.env
 
 /** @name XapiRobot
  **/
@@ -14,8 +11,8 @@ export default class XapiRobot extends TelegramApiRobot {
   protected xapi: XAPI
 
   private defaultConfig = {
-    accountId: process.env.ACCOUNTID || '',
-    password: process.env.PASSWORD || '',
+    accountId: config.get('Telegram.accountId') as string,
+    password: config.get('Telegram.password') as string,
     host: 'ws.xtb.com', // only for XTB accounts
     type: 'demo',
     appName: 'K1NGbot',

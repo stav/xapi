@@ -3,10 +3,13 @@ Tip:
   type: SELL
   entry: 1861
   sl: 1871
-  tps: [ 1857 ]
+  tps:
+    - 1851
+    - 1853
+    - 1857
   volume: 1
 
-Test:
+Hedge:
   Assets:
     - symbol: BITCOIN
       volume: 0.1
@@ -26,3 +29,13 @@ Update:
   type: 3
   entry: 1825.8
   sl: 1833.8
+
+Telegram:
+  accountId: 0
+  password: ''
+  token: ''
+  apiId: 0
+  apiHash: ''
+  session: ''
+  chats: []
+  chat: ''
