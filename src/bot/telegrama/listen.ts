@@ -1,5 +1,8 @@
 import { NewMessage } from 'telegram/events'
+import dotenv from 'dotenv'
 import chats from './chats'
+
+dotenv.config(); // loads .env into process.env
 
 const re = /XAUUSD (?<type>BUY|SELL)\s+ENTRADA: (?<price>[\d.]+)\s+SL: (?<sl>[\d.]+)\s+(?<tps>.+)/s
 
@@ -21,8 +24,9 @@ async function handler(event: any) {
     const sender = await m.getSender();
     const name = sender.username || sender.title;
     const date = new Date(m.date * 1000);
-    console.log(event.chatId, date, name, '|', message);
-    if (event.chatId === -1001235920908 ) {
+    const targetChatId = +(process.env.CHAT || 0)
+    console.log(event.chatId, process.env.CHAT, date, name, '|', message);
+    if (event.chatId === targetChatId) {
       parseMessage(m.message)
     }
   }
