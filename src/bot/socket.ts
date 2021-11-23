@@ -1,5 +1,5 @@
 import { writeAllSymbols } from '../lib/symbols'
-import { buySellTip, buySellPrice } from '../orders'
+import { createOrders, createOrdersFromTip, createOrdersHedge } from '../orders'
 import {
   getFamilyTrades,
   printAllTrades,
@@ -13,25 +13,27 @@ import XapiRobot from './xapirobot'
  **/
 export default class SocketApiRobot extends XapiRobot {
 
-  protected buySellTip: Function
   protected printTrades: Function
-  protected buySellPrice: Function
+  protected createOrders: Function
   protected getAllTrades: Function
   protected updateTrades: Function
   protected printAllTrades: Function
   protected getFamilyTrades: Function
   protected writeAllSymbols: Function
+  protected createOrdersHedge: Function
+  protected createOrdersFromTip: Function
 
   constructor() {
     super()
 
-    this.buySellTip = buySellTip
-    this.buySellPrice = buySellPrice
+    this.createOrders = createOrders
     this.getAllTrades = getAllTrades
     this.updateTrades = updateTrades
     this.printAllTrades = printAllTrades
     this.getFamilyTrades = getFamilyTrades
     this.writeAllSymbols = writeAllSymbols
+    this.createOrdersHedge = createOrdersHedge
+    this.createOrdersFromTip = createOrdersFromTip
 
     this.printTrades = printTrades
     this.printTrades = this.printTrades.bind(this)
