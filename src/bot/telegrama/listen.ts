@@ -1,23 +1,44 @@
 import { NewMessage } from 'telegram/events'
 import dotenv from 'dotenv'
+
+import KingBot from '../king';
+import Logger from '../../log'
+
 import chats from './chats'
 
 dotenv.config(); // loads .env into process.env
 
-const re = /XAUUSD (?<type>BUY|SELL)\s+ENTRADA: (?<price>[\d.]+)\s+SL: (?<sl>[\d.]+)\s+(?<tps>.+)/s
+const re = /XAUUSD (?<type>BUY|SELL)\s+ENTRADA: (?<entry>[\d.]+)\s+SL: (?<sl>[\d.]+)\s+(?<tps>.+)/s
 
-function parseMessage(text: string) {
+/** @name parseMessageForSignal
+ **
+ ** @param text XAUUSD SELL ENTRADA: 1796 SL: 1806 TP1: 1794 TP2: 1792 TP3: 1789
+ **
+ ** @returns {
+ **    type: 'SELL',
+ **    entry: '1796',
+ **    sl: '1806',
+ **    tps: [ 1794, 1792, 1789 ]
+ **  }
+ **/
+function parseMessageForSignal(text: string): any {
   const message = text || ''
   const m: any = message.match(re)?.groups || '';
-  try {
-    const tps = m.tps.split('\n').map((tp: string) => +(tp.trim().match(/[\d.]+$/) || [0])[0]); // TODO uh yeah
-    console.log(m.type, 'GOLD', '@', m.price, 'unless', m.sl, 'tps', tps);
+  const symbol = 'GOLD'
+  const volume = 1
+
+  function tpLabelMap(tpLabel: string) {
+    const tpMatch = tpLabel.trim().match(/[\d.]+$/) || [0]
+    return +tpMatch[0]
   }
-  catch (e) { }
+
+  const tps = m.tps.split('\n').map(tpLabelMap).filter(Boolean);
+  const signal = Object.assign( { symbol, volume }, m, { tps } )
+  return signal
 }
 
-async function handler(event: any) {
-  console.log();
+async function handler(kingbot: KingBot, event: any) {
+  Logger.info();
   if ('message' in event) {
     const m = event.message;
     const message = m.message.replace(/\s+/g, ' ');
@@ -25,24 +46,30 @@ async function handler(event: any) {
     const name = sender.username || sender.title;
     const date = new Date(m.date * 1000);
     const targetChatId = +(process.env.CHAT || 0)
-    console.log(event.chatId, process.env.CHAT, date, name, '|', message);
+    Logger.info(event.chatId, date, name, '|', message);
     if (event.chatId === targetChatId) {
-      parseMessage(m.message)
+      let signal
+      try {
+        signal = parseMessageForSignal(m.message)
+      } catch (e) { }
+      if (signal?.tps?.length) {
+        kingbot.createOrdersFromTelegram(signal)
+      }
     }
   }
   else {
-    console.warn(event)
+    Logger.error(event)
   }
 }
 
-export default async function (client: any) {
+export default async function (kingbot: KingBot, client: any) {
 
   const me = await client.getMe();
   const username = me.username ? `(${me.username})` : ''
   // const user = await client.getEntity(algo);
-  console.log('Logged in as', me.id, me.firstName, username, client.session.save())
+  Logger.info('Logged in as', me.id, me.firstName, username, client.session.save())
 
-  client.addEventHandler(handler, new NewMessage({ chats }));
-  console.info('Listening', chats.length, chats);
+  client.addEventHandler((event: any) => handler(kingbot, event), new NewMessage({ chats }));
+  Logger.info('Listening', chats.length, chats);
 
 }

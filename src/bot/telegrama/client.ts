@@ -1,10 +1,11 @@
 import { TelegramClient } from 'telegram'
+import KingBot from '../king'
 import Listen from './listen'
 import auth from './auth'
 
 async function nic(x: any) { return x }
 
-export default async function Client () {
+export default async function Client (kingbot: KingBot) {
 
   const client = new TelegramClient(
     auth.session,
@@ -21,7 +22,7 @@ export default async function Client () {
     onError    : console.error,
   })
 
-  Listen(client);
+  Listen(kingbot, client);
 
   return client;
 

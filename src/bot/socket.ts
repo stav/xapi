@@ -1,5 +1,12 @@
-import { writeAllSymbols } from '../lib/symbols'
-import { createOrders, createOrdersFromTip, createOrdersHedge } from '../orders'
+import {
+  writeAllSymbols,
+} from '../lib/symbols'
+import {
+  createOrders,
+  createOrdersFromTip,
+  createOrdersFromTelegram,
+  createOrdersHedge,
+} from '../orders'
 import {
   getFamilyTrades,
   printAllTrades,
@@ -7,6 +14,7 @@ import {
   updateTrades,
   printTrades,
 } from '../trades'
+
 import XapiRobot from './xapirobot'
 
 /** @name SocketApiRobot
@@ -23,6 +31,8 @@ export default class SocketApiRobot extends XapiRobot {
   protected createOrdersHedge: Function
   protected createOrdersFromTip: Function
 
+  createOrdersFromTelegram: Function
+
   constructor() {
     super()
 
@@ -34,6 +44,7 @@ export default class SocketApiRobot extends XapiRobot {
     this.writeAllSymbols = writeAllSymbols
     this.createOrdersHedge = createOrdersHedge
     this.createOrdersFromTip = createOrdersFromTip
+    this.createOrdersFromTelegram = createOrdersFromTelegram
 
     this.printTrades = printTrades
     this.printTrades = this.printTrades.bind(this)

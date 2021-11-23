@@ -1,4 +1,5 @@
 import { TelegramClient } from 'telegram'
+import KingBot from '../king'
 import Robot from '../robot'
 import Client from './client'
 
@@ -13,8 +14,8 @@ export default class TelegramApiRobot extends Robot {
     this.telegramClient = null
   }
 
-  async connect_telegram (): Promise<void> {
-    this.telegramClient = await Client()
+  async connect_telegram (this: KingBot): Promise<void> {
+    this.telegramClient = await Client(this)
   }
 
   disconnect (): void {
