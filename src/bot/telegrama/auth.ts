@@ -1,7 +1,7 @@
 import { StringSession } from 'telegram/sessions'
 import dotenv from 'dotenv'
 
-dotenv.config(); // loads .env into process.env
+dotenv.config() // loads .env into process.env
 
 export default {
   token: process.env.TOKEN,

@@ -20,7 +20,7 @@ export default class TelegramApiRobot extends Robot {
 
   disconnect (): void {
     super.disconnect()
-    this.telegramClient && this.telegramClient.disconnect();
+    this.telegramClient && this.telegramClient.disconnect()
   }
 
 }

@@ -22,8 +22,8 @@ export default async function Client (kingbot: KingBot) {
     onError    : console.error,
   })
 
-  Listen(kingbot, client);
+  Listen(kingbot, client)
 
-  return client;
+  return client
 
 }
