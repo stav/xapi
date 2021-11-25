@@ -20,14 +20,14 @@ export default class KeyedApiRobot extends StreamingApiRobot {
     // Caution: may not work with future transpiling/minification in production
     // Mapped (inner) functions not bound to instance in this context (use call)
     this._keyMap = {
-      [ctrlC]: function Disconnect() { this.disconnect       () },
-      [ctrlD]: function Disconnect() { this.disconnect       () },
-           1 : function Connect   () { this.connect          () },
-       //  2 : function _ () { },
-           3 : function Trade_Tip () { this.buySellTip       () },
-           4 : function Trade_Prc () { this.buySellPrice     () },
-           5 : function Update    () { this.updateTrades     () },
-           6 : function Positions () { this.printAllTrades   () },
+      [ctrlC]: function Disconnect() { this.disconnect         () },
+      [ctrlD]: function Disconnect() { this.disconnect         () },
+           1 : function Connect_XA() { this.connect_xapi       () },
+           2 : function Connect_Te() { this.connect_telegram   () },
+           3 : function Trade_Tip () { this.createOrdersFromTip() },
+           4 : function Trade_Prc () { this.createOrdersHedge  () },
+           5 : function Update    () { this.updateTrades       () },
+           6 : function Positions () { this.printAllTrades     () },
        //  7 : function _ () { },
        //  8 : function _ () { },
            9 : function Symbols   () { this.writeAllSymbols  () },

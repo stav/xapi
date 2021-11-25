@@ -17,4 +17,10 @@ export default class Robot {
     return process.env.NODE_ENV === 'test'
   }
 
+  disconnect (): void {
+    if (!this.isTestMode) {
+      console.log('Exit')
+    }
+  }
+
 }

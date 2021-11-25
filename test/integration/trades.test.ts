@@ -38,7 +38,7 @@ describe("Trades", () => {
         done(error)
       }
     }
-    king.connect(async () => await callback())
+    king.connect_xapi(async () => await callback())
   })
 
 })

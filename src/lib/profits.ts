@@ -6,8 +6,8 @@ import {
   STREAMING_TRADE_RECORD,
 } from 'xapi-node'
 
-import Logger from "../log/king"
 import KingBot from '../bot'
+import Logger from "../log"
 
 type UpdateOrderEvent = Partial<TRADE_TRANS_INFO>
 
@@ -28,7 +28,7 @@ function isBuyOrder(cmd: number): boolean {
  **   instead of where it should be (halfway between Open & TP2).
  **
  ** @note Technically, the stop loss should, except for TP1, be moved to the
- **   previous TP level; but, since we don't have get any meta-data about other
+ **   previous TP level, but since we don't have get any meta-data about other
  **   orders when we close a TP, the current implementation just sets the SL
  **   to the average of the open & close prices.
  **/
