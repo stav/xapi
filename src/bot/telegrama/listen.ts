@@ -4,7 +4,7 @@ import config from 'config'
 import Logger from '../../log'
 import KingBot from '../king'
 
-const re = /XAUUSD (?<type>BUY|SELL)\s+ENTRADA: (?<entry>[\d.]+)\s+SL: (?<sl>[\d.]+)\s+(?<tps>.+)/s
+const re = /XAUUSD (?<type>BUY|SELL)\s+ENTRADA:\s*(?<entry>[\d.]+)\s+SL:\s*(?<sl>[\d.]+)\s+(?<tps>.+)/s
 
 const chats = config.get('Telegram.chats') as number[]
 
