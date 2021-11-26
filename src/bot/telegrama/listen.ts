@@ -45,6 +45,9 @@ async function handler(kingbot: KingBot, event: any) {
 
 export default async function (kingbot: KingBot, client: any) {
 
+  kingbot.telegramChatParserMap = pmap
+  kingbot.telegramChats = chats
+
   const me = await client.getMe()
   const username = me.username ? `(${me.username})` : ''
   // const user = await client.getEntity(algo)

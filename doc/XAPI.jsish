@@ -1,7 +1,8 @@
 {
   _listeners: {
-    xapi_onReady: { sconstructor: [Function (anonymous)], g2: [Function: ready] },
-    xapi_onReject: { g0: [Function: error] }
+    xapi_onReady: { sconstructor: [Function (anonymous)], g2: [Function: callback] },
+    xapi_onReject: { g0: [Function: error] },
+    xapi_onConnectionChange: { g0: [Function: bound ] }
   },
   orders: {},
   timer: {
@@ -10,62 +11,80 @@
         _idleTimeout: 19000,
         _idlePrev: [TimersList],
         _idleNext: [TimersList],
-        _idleStart: 1984,
+        _idleStart: 11376,
         _onTimeout: [Function (anonymous)],
         _timerArgs: undefined,
         _repeat: 19000,
         _destroyed: false,
         [Symbol(refed)]: true,
         [Symbol(kHasPrimitive)]: false,
-        [Symbol(asyncId)]: 53,
+        [Symbol(asyncId)]: 108,
         [Symbol(triggerId)]: 0
       },
       Timeout {
         _idleTimeout: 60000,
         _idlePrev: [TimersList],
         _idleNext: [TimersList],
-        _idleStart: 1984,
+        _idleStart: 11376,
         _onTimeout: [Function (anonymous)],
         _timerArgs: undefined,
         _repeat: 60000,
         _destroyed: false,
         [Symbol(refed)]: true,
         [Symbol(kHasPrimitive)]: false,
-        [Symbol(asyncId)]: 54,
+        [Symbol(asyncId)]: 109,
         [Symbol(triggerId)]: 0
       },
       Timeout {
         _idleTimeout: 5100,
         _idlePrev: [TimersList],
         _idleNext: [TimersList],
-        _idleStart: 1984,
+        _idleStart: 11376,
         _onTimeout: [Function (anonymous)],
         _timerArgs: undefined,
         _repeat: 5100,
         _destroyed: false,
         [Symbol(refed)]: true,
         [Symbol(kHasPrimitive)]: false,
-        [Symbol(asyncId)]: 55,
+        [Symbol(asyncId)]: 110,
         [Symbol(triggerId)]: 0
       }
     ],
     timeout: []
   },
-  connectionProgress: true,
+  connectionProgress: false,
   _rateLimit: 850,
   _tryReconnect: true,
-  _positions: {},
-  _positionsUpdated: Time { unit: [ 89134, 668559333 ], UTCTimestamp: 1633647942459 },
-  _serverTime: null,
+  _positions: {
+    '321476498': { value: [TradeRecord], lastUpdated: [Time] },
+    '321479294': { value: [TradeRecord], lastUpdated: [Time] },
+    '321824468': { value: [TradeRecord], lastUpdated: [Time] },
+    '321824495': { value: [TradeRecord], lastUpdated: [Time] },
+    '321824655': { value: [TradeRecord], lastUpdated: [Time] },
+    '321824672': { value: [TradeRecord], lastUpdated: [Time] },
+    '321824757': { value: [TradeRecord], lastUpdated: [Time] },
+    '321826442': { value: [TradeRecord], lastUpdated: [Time] },
+    '321827366': { value: [TradeRecord], lastUpdated: [Time] },
+    '321833678': { value: [TradeRecord], lastUpdated: [Time] },
+    '321833682': { value: [TradeRecord], lastUpdated: [Time] },
+    '321833685': { value: [TradeRecord], lastUpdated: [Time] },
+    '321833690': { value: [TradeRecord], lastUpdated: [Time] }
+  },
+  _positionsUpdated: Time { unit: [ 184259, 396971405 ], UTCTimestamp: 1638730240559 },
+  _serverTime: {
+    timestamp: 1638730240636,
+    ping: 128,
+    received: Time { unit: [Array], UTCTimestamp: 1638730240689 }
+  },
   _logger: Logger4V2 {
     _listeners: {},
-    streams: {},
+    streams: { debug: [Object] },
     params: { log: [Function: log], error: [Function: error] }
   },
   account: {
     type: 'demo',
-    accountId: '12661566',
-    appName: undefined,
+    accountId: 12769999,
+    appName: 'K1NGbot',
     host: 'ws.xtb.com',
     safe: false,
     subscribeTrades: true
@@ -78,16 +97,17 @@
       command_getServerTime: [Object]
     },
     transactions: {
-      '163364794119900010': [Object],
-      '163364794209900020': [Object],
-      '163364794233200030': [Object],
-      '163364794246000040': [Object]
+      '163873023257700010': [Object],
+      '163873023926600020': [Object],
+      '163873024016800030': [Object],
+      '163873024042700040': [Object],
+      '163873024056100050': [Object]
     },
-    lastReceivedMessage: Time { unit: [Array], UTCTimestamp: 1633647942459 },
+    lastReceivedMessage: Time { unit: [Array], UTCTimestamp: 1638730240689 },
     openTimeout: Timer { interval: null, timeout: null },
     messageQueues: { urgent: [], normal: [] },
-    _transactionIdIncrement: 4,
-    messagesElapsedTime: [ [Time], [Time], [Time] ],
+    _transactionIdIncrement: 5,
+    messagesElapsedTime: [ [Time], [Time], [Time], [Time] ],
     messageSender: Timer { interval: null, timeout: null },
     _status: 2,
     XAPI: [Circular *1],
@@ -103,7 +123,7 @@
       _status: true,
       url: 'wss://ws.xtb.com/demo'
     },
-    _password: 'xoh14850',
+    _password: 'xoh99999',
     listen: {
       getAllSymbols: [Function: getAllSymbols],
       getCalendar: [Function: getCalendar],
@@ -159,24 +179,26 @@
     _listeners: {
       xapi_onConnectionChange: [Object],
       command_trade: [Object],
-      command_tradeStatus: [Object]
+      command_tradeStatus: [Object],
+      command_keepAlive: [Object]
     },
     transactions: {
-      '163364794233100011': [Object],
-      '163364794246000021': [Object],
-      '163364794246000031': [Object]
+      '163873024042600011': [Object],
+      '163873024056000021': [Object],
+      '163873024056000031': [Object],
+      '163873024056300041': [Object]
     },
-    lastReceivedMessage: null,
+    lastReceivedMessage: Time { unit: [Array], UTCTimestamp: 1638730241771 },
     openTimeout: Timer { interval: null, timeout: null },
     messageQueues: { urgent: [], normal: [] },
-    _transactionIdIncrement: 3,
-    messagesElapsedTime: [ [Time] ],
+    _transactionIdIncrement: 4,
+    messagesElapsedTime: [ [Time], [Time], [Time], [Time] ],
     messageSender: Timer { interval: null, timeout: null },
     _status: 2,
     XAPI: [Circular *1],
     rateLimit: 850,
     type: 'Stream',
-    session: '5cf3fcfffe78123a-0000196a-007490e7-cd3233752d7a89ae-40960a09',
+    session: '5cf3fcfffe78123a-...-ad5e3ff8',
     pingTimeout: Timer { interval: null, timeout: null },
     WebSocket: WebSocketWrapper {
       _listeners: [Object],

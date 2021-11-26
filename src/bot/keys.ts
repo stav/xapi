@@ -30,8 +30,8 @@ export default class KeyedApiRobot extends StreamingApiRobot {
            6 : function Positions () { this.printAllTrades     () },
        //  7 : function _ () { },
        //  8 : function _ () { },
-           9 : function Symbols   () { this.writeAllSymbols  () },
-       //  0 : function _ () { },
+           9 : function Symbols   () { this.writeAllSymbols    () },
+           0 : function Status    () { this.printStatus        () },
     }
   }
 
@@ -56,7 +56,8 @@ export default class KeyedApiRobot extends StreamingApiRobot {
 
   /**
    *     "?" does nothing
-   *     "1" Connect
+   *     "1" Connect_XA
+   *     "2" Connect_Te
    *     "3" Trade_Tip
    *     "4" Trade_Prc
    *     "5" Update

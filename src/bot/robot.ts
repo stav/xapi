@@ -1,16 +1,19 @@
-import KingLogger from '../log'
+import child from 'child_process'
+import Logger from '../log'
 
 /**
  */
 export default class Robot {
 
-  protected log: KingLogger
+  private _revision: string
 
-  testing: any
+  protected log = new Logger()
+
+  testing: any = {}
 
   constructor() {
-    this.log = new KingLogger()
-    this.testing = {}
+    const gitCommand = 'git rev-parse --short HEAD'
+    this._revision = child.execSync(gitCommand).toString().trim()
   }
 
   get isTestMode(): Boolean {
@@ -18,9 +21,12 @@ export default class Robot {
   }
 
   disconnect (): void {
-    if (!this.isTestMode) {
-      console.log('Exit')
-    }
+    this.log.info('Exit')
+  }
+
+  printStatus (): void {
+    this.log.info('Print status')
+    this.log.info('Repository revision', this._revision)
   }
 
 }
