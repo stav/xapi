@@ -7,6 +7,8 @@ import {
   TRADE_TRANS_INFO,
  } from 'xapi-node'
 
+import Logger from '../log'
+
 interface Asset {
   symbol: string
   volume: number
@@ -23,7 +25,7 @@ export default async function (getTickPrices: Function, error: Function): Promis
   }
   const records: TICK_RECORD[] = result.returnData.quotations
   const levelZeroRecords = records.filter(r => r.level === 0)
-  console.info('TICKS records', levelZeroRecords)
+  Logger.info('Records', levelZeroRecords)
   const timestamp: number = Date.now()
   const orders = []
   const order = {
@@ -43,7 +45,7 @@ export default async function (getTickPrices: Function, error: Function): Promis
     const buyPrice = parseFloat((bid + bid * 0.002 * mod).toFixed(asset?.digits))
     const sellPrice = parseFloat((bid - bid * 0.001 * mod).toFixed(asset?.digits))
     let tpLevel: number = 0
-    console.log('TICK spread', record.symbol, buyPrice - sellPrice)
+    Logger.info('Spread', record.symbol, buyPrice - sellPrice)
     for (const rate of tpRates) {
       tpLevel++
       orders.push(Object.assign({}, order, {

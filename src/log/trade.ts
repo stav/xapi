@@ -2,7 +2,7 @@ import fs from 'fs'
 
 import { STREAMING_TRADE_RECORD, TRADE_TRANS_INFO } from 'xapi-node'
 
-import { logErrorToConsole } from './error'
+import { printErrorToConsole } from './error'
 
 export type TradeRecord = STREAMING_TRADE_RECORD | TRADE_TRANS_INFO
 
@@ -12,6 +12,6 @@ export function logTradeToFile (trade: TradeRecord): void {
     fs.appendFile('./log/trades.jsonl', json, ()=>{})
   }
   catch (e: unknown) {
-    logErrorToConsole(e, trade)
+    printErrorToConsole(e, trade)
   }
 }

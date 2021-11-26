@@ -4,6 +4,7 @@
   "description": "Trading robot for XTB",
   "main": "index.ts",
   "scripts": {
+    "x": "tsc && node dist/index.js",
     "test": "jest",
     "test-det": "jest --detectOpenHandles",
     "cov": "jest --coverage"

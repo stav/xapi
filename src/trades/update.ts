@@ -24,14 +24,14 @@ export async function updateTrades(this: KingBot): Promise<void> {
   const update: UpdateTransactionInfo = config.util.loadFileConfigs().Update
   const entry: number = update.entry
   const trades = this.xapi.positions.filter(trade => trade.open_price === entry) // TODO: could be stop loss or family-trades or something
-  console.log('Update trades with open price of', entry)
+  this.log.info('Update trades with open price of', entry)
   this.printTrades(trades)
   let count = 0
 
   for (const trade of trades) {
     // The next line shadows `entry` just for this (for) block in order to not include it in `transaction`
     const { entry, ...transaction } = Object.assign({}, {order: trade.order}, update)
-    console.log('transaction', transaction)
+    this.log.info('transaction', transaction)
     const result: TradeStatus = await tradeTransaction(transaction).catch(this.log.error) // Need to retry failed transaction
     if (result) {
       // TODO: Watch for duplicate orders
@@ -54,7 +54,7 @@ export async function updateTrades(this: KingBot): Promise<void> {
       }
     }
   }
-  console.log('Updated', count, 'trades with entry', entry)
+  this.log.info('Updated', count, 'trades with entry', entry)
   const positions: number[] = trades.map(trade => trade.position)
   const result = await getTradeRecords(positions).catch(this.log.error)
   if (result) {

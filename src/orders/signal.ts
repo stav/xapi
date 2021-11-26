@@ -2,7 +2,9 @@ import {
   CMD_FIELD,
   TYPE_FIELD,
   TRADE_TRANS_INFO,
- } from 'xapi-node'
+} from 'xapi-node'
+
+import Logger from '../log'
 
 interface Signal {
   symbol: string
@@ -14,7 +16,7 @@ interface Signal {
 }
 
 export default function (signal: Signal): TRADE_TRANS_INFO[] {
-  console.log('nice, signal', signal)
+  Logger.info('Signal', signal)
 
   const timestamp: number = Date.now()
   let tpLevel: number = 0

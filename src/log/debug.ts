@@ -1,7 +1,7 @@
 import fs from 'fs'
 import stream from 'stream'
 
-import { logErrorToConsole } from './error'
+import { printErrorToConsole } from './error'
 
 export default class DebugLogger extends stream.Writable {
   _write(chunk: string | Buffer | Uint8Array, encoding: string, next: Function): void {
@@ -10,7 +10,7 @@ export default class DebugLogger extends stream.Writable {
       next()
     }
     catch (e: unknown) {
-      logErrorToConsole(e, chunk)
+      printErrorToConsole(e, chunk)
     }
   }
 }

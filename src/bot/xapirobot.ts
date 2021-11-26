@@ -39,7 +39,7 @@ export default class XapiRobot extends TelegramApiRobot {
     if (typeof status === 'number') {
       status = ConnectionStatus[status]
     }
-    console.info('Socket is:', status)
+    this.log.info('Socket is:', status)
   }
 
   get isConnected(): Boolean {
@@ -51,9 +51,7 @@ export default class XapiRobot extends TelegramApiRobot {
       this.printStatus()
       return
     }
-    if (!this.isTestMode) {
-      console.info('Connecting socket')
-    }
+    this.log.info('Connecting socket')
     this.xapi.connect().catch(console.error)
     this.xapi.onReject(console.error)
     this.xapi.onConnectionChange(this.printStatus.bind(this))

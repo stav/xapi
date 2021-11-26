@@ -9,7 +9,7 @@ interface GeneralError {
   params?: Params
 }
 
-export async function logErrorToConsole (_e: unknown, ...data: any[]): Promise<void> {
+export async function printErrorToConsole (_e: unknown, ...data: any[]): Promise<void> {
   const e: GeneralError = <GeneralError>_e
   let message = ''
   if (e.message) {
@@ -30,6 +30,6 @@ export function logErrorToFile (e: unknown, ...optionalParams: any[]): void {
     fs.appendFile('./log/error', json, ()=>{})
   }
   catch (e: unknown) {
-    logErrorToConsole(e, optionalParams)
+    printErrorToConsole(e, optionalParams)
   }
 }

@@ -2,8 +2,8 @@ import fs from 'fs'
 
 import { logErrorToFile } from './error'
 
-export function logInfoToConsole (...messages: any[]): void {
-  console.log(...messages)
+export function printInfoToConsole (...messages: any[]): void {
+  console.info(...messages)
 }
 
 export function logInfoToFile (...messages: any[]): void {
