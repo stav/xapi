@@ -1,0 +1,19 @@
+How to calculate the position sizing (FX lots)
+
+  myfxbook.com/en/forex-calculators/position-size
+
+Say we have $1000 in our account and we accept a 2% loss.
+
+  1. Max loss: $20
+
+  2. Entry price: $1.34
+
+  3. Stop loss price: $1.33
+
+  4. Position size: ?
+
+Formula:
+
+size   = maxLoss / (entry - stop)  / 100,000 * entry
+
+0.0268 =   20    / ( 1.34 - 1.33 ) / 100000  * 1.34

@@ -98,10 +98,11 @@ real information:
         apiId: 45678
         apiHash: aA1bB2cC3
         session: ""
-        chat: 56789
-        chats:
-          - 56789
-          - -10067890
+        Chats:
+            - 56789
+            - -10067890
+        ChatParserMap:
+            "-10067890": "name_of_parser_module"
 
 ## Usage
 
