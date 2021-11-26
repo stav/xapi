@@ -17,8 +17,8 @@ import {
 
 import XapiRobot from './xapirobot'
 
-/** @name SocketApiRobot
- **/
+/**
+ */
 export default class SocketApiRobot extends XapiRobot {
 
   protected printTrades: Function

@@ -7,6 +7,11 @@ function doneWritingSymbols(symbolRecords: SYMBOL_RECORD[]): void {
   Logger.info(`${symbolRecords.length} symbols written`)
 }
 
+/** @name writeAllSymbols */
+/**
+ * Get the full asset list for all supported symbols from the server
+ * and write them to a file called `symbols.json`
+ */
 export async function writeAllSymbols(this: KingBot): Promise<void> {
   this.log.info('Writing symbols file')
   const result = await this.xapi.Socket.send.getAllSymbols().catch(this.log.error)

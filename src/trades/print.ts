@@ -21,8 +21,8 @@ function printFamilys(trades: TradeRecords, info: Function): void {
   }
 }
 
-/** @name printTrades
- **/
+/**
+ */
 export function printTrades (this: KingBot, trades: TradeRecords): void {
   printFamilys(trades, this.log.info)
   for (let i=0; i<trades.length; i++) {
@@ -44,8 +44,8 @@ export function printTrades (this: KingBot, trades: TradeRecords): void {
   }
 }
 
-/** @name printAllTrades
- **/
+/**
+ */
 export async function printAllTrades (this: KingBot): Promise<void> {
   this.log.info('Printing all positions')
   const trades: TRADE_RECORD[] = await this.getAllTrades()

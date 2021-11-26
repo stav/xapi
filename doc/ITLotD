@@ -1,0 +1,28 @@
+IT Lesson Of The Day (ITLotD): *Regular Expressions*
+
+A regular expression is a sequence of characters that specifies a search pattern.
+
+Let's take our OLD _regex_:
+```/XAUUSD (?<type>BUY|SELL)\s+ENTRADA: (?<entry>[\d.]+)\s+SL: (?<sl>[\d.]+)\s+(?<tps>.+)/```
+
+This basically says:
+   1. find the string "XAUUSD"
+   2. followed by exactly one space
+   3. followed by either "BUY" or "SELL" and store it in the variable `type`
+   4. followed by at least one white-space character
+   5. followed by the string "ENTRADA:"
+   6. followed by exactly one space
+   7. followed by at least one digit or period and store it in the variable `entry`
+   8. followed by at least one white-space character
+   9. followed by the string "SL:"
+  10. followed by exactly one space
+  11. followed by at least one digit or period and store it in the variable `sl`
+  12. followed by at least one white-space character
+  13. and take the rest of the tip and store it in the variable `tps`
+
+So the space from step six (6) was missing and the whole sequence got aborted.
+
+So the new regex looks like:
+```/XAUUSD (?<type>BUY|SELL)\s+ENTRADA:\s*(?<entry>[\d.]+)\s+SL:\s*(?<sl>[\d.]+)\s+(?<tps>.+)/```
+
+which replaces the space in steps #6 & #10 from " " to "\s*" which instead of looking for only one space will now be ok with on space, lots of spaces or even no spaces.

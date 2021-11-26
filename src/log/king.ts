@@ -3,8 +3,8 @@ import { logTradeToFile, TradeRecord } from './trade'
 import { printInfoToConsole, logInfoToFile } from './info'
 import { printErrorToConsole, logErrorToFile } from './error'
 
-/** @name Logger
- **/
+/**
+ */
 export default class Logger {
 
   debug: DebugLogger

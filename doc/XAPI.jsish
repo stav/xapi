@@ -1,0 +1,220 @@
+{
+  _listeners: {
+    xapi_onReady: { sconstructor: [Function (anonymous)], g2: [Function: ready] },
+    xapi_onReject: { g0: [Function: error] }
+  },
+  orders: {},
+  timer: {
+    interval: [
+      Timeout {
+        _idleTimeout: 19000,
+        _idlePrev: [TimersList],
+        _idleNext: [TimersList],
+        _idleStart: 1984,
+        _onTimeout: [Function (anonymous)],
+        _timerArgs: undefined,
+        _repeat: 19000,
+        _destroyed: false,
+        [Symbol(refed)]: true,
+        [Symbol(kHasPrimitive)]: false,
+        [Symbol(asyncId)]: 53,
+        [Symbol(triggerId)]: 0
+      },
+      Timeout {
+        _idleTimeout: 60000,
+        _idlePrev: [TimersList],
+        _idleNext: [TimersList],
+        _idleStart: 1984,
+        _onTimeout: [Function (anonymous)],
+        _timerArgs: undefined,
+        _repeat: 60000,
+        _destroyed: false,
+        [Symbol(refed)]: true,
+        [Symbol(kHasPrimitive)]: false,
+        [Symbol(asyncId)]: 54,
+        [Symbol(triggerId)]: 0
+      },
+      Timeout {
+        _idleTimeout: 5100,
+        _idlePrev: [TimersList],
+        _idleNext: [TimersList],
+        _idleStart: 1984,
+        _onTimeout: [Function (anonymous)],
+        _timerArgs: undefined,
+        _repeat: 5100,
+        _destroyed: false,
+        [Symbol(refed)]: true,
+        [Symbol(kHasPrimitive)]: false,
+        [Symbol(asyncId)]: 55,
+        [Symbol(triggerId)]: 0
+      }
+    ],
+    timeout: []
+  },
+  connectionProgress: true,
+  _rateLimit: 850,
+  _tryReconnect: true,
+  _positions: {},
+  _positionsUpdated: Time { unit: [ 89134, 668559333 ], UTCTimestamp: 1633647942459 },
+  _serverTime: null,
+  _logger: Logger4V2 {
+    _listeners: {},
+    streams: {},
+    params: { log: [Function: log], error: [Function: error] }
+  },
+  account: {
+    type: 'demo',
+    accountId: '12661566',
+    appName: undefined,
+    host: 'ws.xtb.com',
+    safe: false,
+    subscribeTrades: true
+  },
+  Socket: Socket {
+    _listeners: {
+      xapi_onConnectionChange: [Object],
+      command_login: [Object],
+      command_getTrades: [Object],
+      command_getServerTime: [Object]
+    },
+    transactions: {
+      '163364794119900010': [Object],
+      '163364794209900020': [Object],
+      '163364794233200030': [Object],
+      '163364794246000040': [Object]
+    },
+    lastReceivedMessage: Time { unit: [Array], UTCTimestamp: 1633647942459 },
+    openTimeout: Timer { interval: null, timeout: null },
+    messageQueues: { urgent: [], normal: [] },
+    _transactionIdIncrement: 4,
+    messagesElapsedTime: [ [Time], [Time], [Time] ],
+    messageSender: Timer { interval: null, timeout: null },
+    _status: 2,
+    XAPI: [Circular *1],
+    rateLimit: 850,
+    type: 'Socket',
+    loginTimeout: Timer { interval: null, timeout: null },
+    pingTimeout: Timer { interval: null, timeout: null },
+    WebSocket: WebSocketWrapper {
+      _listeners: [Object],
+      ws: [WebSocket],
+      _tryReconnect: true,
+      _connectionTimeout: [Timer],
+      _status: true,
+      url: 'wss://ws.xtb.com/demo'
+    },
+    _password: 'xoh14850',
+    listen: {
+      getAllSymbols: [Function: getAllSymbols],
+      getCalendar: [Function: getCalendar],
+      getChartLastRequest: [Function: getChartLastRequest],
+      getChartRangeRequest: [Function: getChartRangeRequest],
+      getCommissionDef: [Function: getCommissionDef],
+      getCurrentUserData: [Function: getCurrentUserData],
+      getIbsHistory: [Function: getIbsHistory],
+      getMarginLevel: [Function: getMarginLevel],
+      getMarginTrade: [Function: getMarginTrade],
+      getNews: [Function: getNews],
+      getProfitCalculation: [Function: getProfitCalculation],
+      getServerTime: [Function: getServerTime],
+      getStepRules: [Function: getStepRules],
+      getSymbol: [Function: getSymbol],
+      getTickPrices: [Function: getTickPrices],
+      getTradeRecords: [Function: getTradeRecords],
+      getTrades: [Function: getTrades],
+      getTradesHistory: [Function: getTradesHistory],
+      getTradingHours: [Function: getTradingHours],
+      getVersion: [Function: getVersion],
+      tradeTransaction: [Function: tradeTransaction],
+      tradeTransactionStatus: [Function: tradeTransactionStatus],
+      ping: [Function: ping],
+      login: [Function: login]
+    },
+    send: {
+      getAllSymbols: [Function: getAllSymbols],
+      getCalendar: [Function: getCalendar],
+      getChartLastRequest: [Function: getChartLastRequest],
+      getChartRangeRequest: [Function: getChartRangeRequest],
+      getCommissionDef: [Function: getCommissionDef],
+      getCurrentUserData: [Function: getCurrentUserData],
+      getIbsHistory: [Function: getIbsHistory],
+      getMarginLevel: [Function: getMarginLevel],
+      getMarginTrade: [Function: getMarginTrade],
+      getNews: [Function: getNews],
+      getProfitCalculation: [Function: getProfitCalculation],
+      getServerTime: [Function: getServerTime],
+      getStepRules: [Function: getStepRules],
+      getSymbol: [Function: getSymbol],
+      getTickPrices: [Function: getTickPrices],
+      getTradeRecords: [Function: getTradeRecords],
+      getTrades: [Function: getTrades],
+      getTradesHistory: [Function: getTradesHistory],
+      getTradingHours: [Function: getTradingHours],
+      getVersion: [Function: getVersion],
+      tradeTransaction: [Function: tradeTransaction],
+      tradeTransactionStatus: [Function: tradeTransactionStatus]
+    }
+  },
+  Stream: Stream {
+    _listeners: {
+      xapi_onConnectionChange: [Object],
+      command_trade: [Object],
+      command_tradeStatus: [Object]
+    },
+    transactions: {
+      '163364794233100011': [Object],
+      '163364794246000021': [Object],
+      '163364794246000031': [Object]
+    },
+    lastReceivedMessage: null,
+    openTimeout: Timer { interval: null, timeout: null },
+    messageQueues: { urgent: [], normal: [] },
+    _transactionIdIncrement: 3,
+    messagesElapsedTime: [ [Time] ],
+    messageSender: Timer { interval: null, timeout: null },
+    _status: 2,
+    XAPI: [Circular *1],
+    rateLimit: 850,
+    type: 'Stream',
+    session: '5cf3fcfffe78123a-0000196a-007490e7-cd3233752d7a89ae-40960a09',
+    pingTimeout: Timer { interval: null, timeout: null },
+    WebSocket: WebSocketWrapper {
+      _listeners: [Object],
+      ws: [WebSocket],
+      _tryReconnect: true,
+      _connectionTimeout: [Timer],
+      _status: true,
+      url: 'wss://ws.xtb.com/demoStream'
+    },
+    listen: {
+      getBalance: [Function: getBalance],
+      getCandles: [Function: getCandles],
+      getKeepAlive: [Function: getKeepAlive],
+      getNews: [Function: getNews],
+      getProfits: [Function: getProfits],
+      getTickPrices: [Function: getTickPrices],
+      getTrades: [Function: getTrades],
+      getTradeStatus: [Function: getTradeStatus]
+    },
+    subscribe: {
+      getBalance: [Function: getBalance],
+      getCandles: [Function: getCandles],
+      getKeepAlive: [Function: getKeepAlive],
+      getNews: [Function: getNews],
+      getProfits: [Function: getProfits],
+      getTickPrices: [Function: getTickPrices],
+      getTrades: [Function: getTrades],
+      getTradeStatus: [Function: getTradeStatus]
+    },
+    unSubscribe: {
+      getBalance: [Function: getBalance],
+      getCandles: [Function: getCandles],
+      getKeepAlive: [Function: getKeepAlive],
+      getNews: [Function: getNews],
+      getProfits: [Function: getProfits],
+      getTickPrices: [Function: getTickPrices],
+      getTrades: [Function: getTrades],
+      getTradeStatus: [Function: getTradeStatus]
+    }
+  }
+}
