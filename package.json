@@ -2,12 +2,15 @@
   "name": "xapi",
   "version": "0.6",
   "description": "Trading robot for XTB",
-  "main": "index.ts",
   "scripts": {
     "x": "tsc && node dist/index.js",
     "test": "jest",
     "test-det": "jest --detectOpenHandles",
-    "cov": "jest --coverage"
+    "cov": "jest --coverage",
+    "doc": "typedoc"
+  },
+  "repository": {
+    "url": "https://github.com/stav/xapi"
   },
   "author": "Steven Almeroth steve@primesite.dev",
   "license": "ISC",
@@ -25,6 +28,8 @@
     "jest": "27.2",
     "jshint": "^2.13.1",
     "ts-jest": "^27.0.7",
+    "typedoc": "^0.22.10",
+    "typedoc-plugin-rename-defaults": "^0.4.0",
     "typescript": "^4.4.3"
   },
   "dependencies": {
