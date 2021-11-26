@@ -4,8 +4,8 @@ import config from 'config'
 
 import TelegramApiRobot from './telegrama'
 
-/** @name XapiRobot
- **/
+/**
+ */
 export default class XapiRobot extends TelegramApiRobot {
 
   protected xapi: XAPI
@@ -22,7 +22,6 @@ export default class XapiRobot extends TelegramApiRobot {
     super()
     this.xapi = new XAPI(this.defaultConfig)
     this.xapi.logger.onStream('debug', this.log.debug)
-    this.main()
   }
 
   main (): void {

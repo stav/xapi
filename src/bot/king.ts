@@ -1,11 +1,13 @@
 import KeyedApiRobot from './keys'
 
-/** @name KingBot
- **/
+/**
+ * Typescript doesn't support multiple inheritance so we extend linearly
+ */
 export default class KingBot extends KeyedApiRobot {
 
   constructor() {
     super()
+    this.main()
   }
 
   main (): void {
