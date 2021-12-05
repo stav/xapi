@@ -9,6 +9,7 @@ import TelegramApiRobot from './telegrama'
 export default class XapiRobot extends TelegramApiRobot {
 
   protected xapi: XAPI
+  protected timestamp: number
 
   private defaultConfig = {
     accountId: config.get('Telegram.accountId') as string,
@@ -20,6 +21,7 @@ export default class XapiRobot extends TelegramApiRobot {
 
   constructor() {
     super()
+    this.timestamp = 0
     this.xapi = new XAPI(this.defaultConfig)
     this.xapi.logger.onStream('debug', this.log.debug)
   }
