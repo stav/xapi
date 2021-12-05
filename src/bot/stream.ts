@@ -2,8 +2,8 @@ import { STREAMING_TRADE_RECORD } from 'xapi-node'
 import { checkProfits } from '../lib/profits'
 import SocketApiRobot from './socket'
 
-/** @name StreamingApiRobot
- **/
+/**
+ */
 export default class StreamingApiRobot extends SocketApiRobot {
 
   protected checkProfits: Function

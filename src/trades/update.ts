@@ -14,8 +14,8 @@ interface EntryInfo {
 type UpdateTransactionInfo = TRADE_TRANS_INFO & EntryInfo
 type TradeStatus = TRADE_STATUS | void
 
-/** @name updateTrades
- **/
+/**
+ */
 export async function updateTrades(this: KingBot): Promise<void> {
   const getTradeRecords = this.xapi.Socket.send.getTradeRecords
   const tradeTransaction = this.xapi.Socket.send.tradeTransaction

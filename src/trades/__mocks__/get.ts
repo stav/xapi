@@ -35,14 +35,14 @@ const trades: TRADE_RECORD[] = [
   }
 ]
 
-/** @name getAllTrades
- **/
+/**
+ */
 export async function getAllTrades (this: KingBot): Promise<TRADE_RECORD[]> {
   return trades
 }
 
-/** @name getFamilyTrades
- **/
+/**
+ */
 export async function getFamilyTrades (this: KingBot, data: STREAMING_TRADE_RECORD): Promise<TRADE_RECORD[]> {
   const familyTrades = trades.map(trade => Object.assign({}, trade, { sl: data.sl }))
   this.log.info('Family trades', trades.length)
