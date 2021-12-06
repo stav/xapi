@@ -30,9 +30,11 @@ Update:
   entry: 1825.8
   sl: 1833.8
 
-Telegram:
+Xapi:
   accountId: 0
   password: ''
+
+Telegram:
   token: ''
   apiId: 0
   apiHash: ''

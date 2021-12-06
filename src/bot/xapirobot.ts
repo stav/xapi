@@ -9,10 +9,10 @@ import TelegramApiRobot from './telegrama'
 export default class XapiRobot extends TelegramApiRobot {
 
   private defaultConfig = {
-    accountId: config.get('Telegram.accountId') as string,
-    password: config.get('Telegram.password') as string,
+    accountId: config.get('Xapi.accountId') as string,
+    password: config.get('Xapi.password') as string,
+    type: config.get('Xapi.type') as string,
     host: 'ws.xtb.com', // only for XTB accounts
-    type: 'demo',
     appName: 'K1NGbot',
   }
 

@@ -92,9 +92,12 @@ in the family, perhaps sadly; but, don't get emotional.
 Create a file called `config/local.yaml` with the following fields but with your
 real information:
 
-    Telegram:
+    Xapi:
         accountId: 12345
         password: xoh23456
+        type: demo # or real
+
+    Telegram:
         token: 34567:aAbBcC
         apiId: 45678
         apiHash: aA1bB2cC3
