@@ -17,6 +17,12 @@ async function printMessage(event: any): Promise<void> {
 }
 
 async function handler(kingbot: KingBot, event: any) {
+  Logger.file(event.chatId, {
+    eventChatId: event.chatId,
+    idInPmap: event.chatId in pmap,
+    isPrivate: event.isPrivate,
+    event,
+  })
   if ('message' in event) {
     await printMessage(event)
     console.log('parser map:', event.chatId in pmap, pmap)
@@ -38,7 +44,7 @@ async function handler(kingbot: KingBot, event: any) {
     }
   }
   else {
-    console.error(event) // TODO: debug
+    console.error('Eroar', event, Object.keys(event)) // TODO: debug
     Logger.error(event)
   }
 }
