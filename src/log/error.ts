@@ -1,4 +1,5 @@
 import fs from 'fs'
+import { logMessageToFile } from './file'
 
 interface Params {
   reason: string
@@ -9,7 +10,7 @@ interface GeneralError {
   params?: Params
 }
 
-export async function printErrorToConsole (_e: unknown, ...data: any[]): Promise<void> {
+function getErrorMessage(_e: unknown): string {
   const e: GeneralError = <GeneralError>_e
   let message = ''
   if (e.message) {
@@ -21,15 +22,16 @@ export async function printErrorToConsole (_e: unknown, ...data: any[]): Promise
   if (!message) {
     message = e.toString()
   }
-  console.error('ERROR:', message.replace(/^[\s|]+/, ''), ...data)
+  return message.replace(/^[\s|]+/, '')
 }
 
-export function logErrorToFile (e: unknown, ...optionalParams: any[]): void {
-  try {
-    const json = JSON.stringify([e, ...optionalParams]) + '\n'
-    fs.appendFile('./log/error', json, ()=>{})
-  }
-  catch (e: unknown) {
+export async function printErrorToConsole (e: unknown, ...data: any[]): Promise<void> {
+  console.error('ERROR:', getErrorMessage(e), ...data)
+}
+
+export function logError(e?: unknown, ...optionalParams: any[]): void {
+  logMessageToFile('error', getErrorMessage(e), optionalParams)
+  if (process.env.NODE_ENV !== 'test') {
     printErrorToConsole(e, optionalParams)
   }
 }

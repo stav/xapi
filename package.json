@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "config": "^3.3.6",
+    "flatted": "^3.2.4",
     "js-yaml": "^4.1.0",
     "telegram": "^1.10.8",
     "xapi-node": "^2.5.4"

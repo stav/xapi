@@ -79,7 +79,14 @@ in the family, perhaps sadly; but, don't get emotional.
 
 ## Documentation
 
-<http://developers.xstore.pro/documentation/>
+xAPI <http://developers.xstore.pro/documentation/>
+
+xapi-node <https://github.com/peterszombati/xapi-node#readme>
+
+Telegram 
+* <https://github.com/gram-js/gramjs#readme>
+* <https://painor.gitbook.io/gramjs/>
+* <https://gram.js.org/>
 
 ## Installation
 

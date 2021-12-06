@@ -12,6 +12,7 @@ specifiers:
   '@types/node': ^16.10.3
   babel-jest: '27.2'
   config: ^3.3.6
+  flatted: ^3.2.4
   jest: '27.2'
   js-yaml: ^4.1.0
   jshint: ^2.13.1
@@ -24,6 +25,7 @@ specifiers:
 
 dependencies:
   config: 3.3.6
+  flatted: 3.2.4
   js-yaml: 4.1.0
   telegram: 1.10.8
   xapi-node: 2.5.4
@@ -2334,6 +2336,10 @@ packages:
       locate-path: 5.0.0
       path-exists: 4.0.0
     dev: true
+
+  /flatted/3.2.4:
+    resolution: {integrity: sha512-8/sOawo8tJ4QOBX8YlQBMxL8+RLZfxMQOif9o0KUKTNTjMYElWPE0r/m5VNFxTRd0NSw8qSy8dajrwX4RYI1Hw==}
+    dev: false
 
   /foreach/2.0.5:
     resolution: {integrity: sha1-C+4AUBiusmDQo6865ljdATbsG5k=}

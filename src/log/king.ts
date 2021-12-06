@@ -1,7 +1,8 @@
 import DebugLogger from './debug'
+import { logError } from './error'
+import { logMessageToFile } from './file'
+import { printInfoToConsole } from './info'
 import { logTradeToFile, TradeRecord } from './trade'
-import { printInfoToConsole, logInfoToFile } from './info'
-import { printErrorToConsole, logErrorToFile } from './error'
 
 /**
  */
@@ -15,7 +16,7 @@ export default class Logger {
 
   static info(...messages: any[]) {
     if (process.env.NODE_ENV === 'test') {
-      logInfoToFile(...messages)
+      logMessageToFile('info', ...messages)
     }
     else {
       printInfoToConsole(...messages)
@@ -23,10 +24,11 @@ export default class Logger {
   }
 
   static error(e?: unknown, ...optionalParams: any[]): void {
-    logErrorToFile(e, optionalParams)
-    if (process.env.NODE_ENV !== 'test') {
-      printErrorToConsole(e, optionalParams)
-    }
+    logError(e, ...optionalParams)
+  }
+
+  static file(fileName: string, ...content: any[]): void {
+    logMessageToFile(fileName, ...content)
   }
 
   info(...messages: any[]) {

@@ -1,8 +1,14 @@
 node_modules/
 coverage/
 dist/
-log/
-!src/log/
-!./log/.gitkeep
 .env
+
+# Sensitive data in the local config file should not go into source control
 config/local.yaml
+
+# Ignore log files
+log/
+# But don't ignore the log directory
+!log/.gitkeep
+# Also don't ignore the logging module
+!src/log/
