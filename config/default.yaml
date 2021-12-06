@@ -7,7 +7,7 @@ Tip:
     - 1851
     - 1853
     - 1857
-  volume: 1
+  volume: 0.01
 
 Hedge:
   Assets:

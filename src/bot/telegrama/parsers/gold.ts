@@ -23,7 +23,7 @@ export default function parseMessageSignal (text: string): any {
   const message = text || ''
   const m: any = message.match(re)?.groups || ''
   const symbol = 'GOLD'
-  const volume = 1
+  const volume = 0.01
 
   function tpLabelMap(tpLabel: string) {
     const tpMatch = tpLabel.trim().match(/[\d.]+$/) || [0]

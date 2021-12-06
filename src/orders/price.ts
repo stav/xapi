@@ -40,7 +40,7 @@ export default async function (getTickPrices: Function, error: Function): Promis
   for (const record of levelZeroRecords) {
     const asset = assets.find(a => a.symbol === record.symbol)
     const mod = asset?.modify || 1
-    const volume = asset?.volume || 1
+    const volume = asset?.volume || 0.01
     const bid = record.bid
     const buyPrice = parseFloat((bid + bid * 0.002 * mod).toFixed(asset?.digits))
     const sellPrice = parseFloat((bid - bid * 0.001 * mod).toFixed(asset?.digits))
