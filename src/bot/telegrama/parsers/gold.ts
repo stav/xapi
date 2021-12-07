@@ -1,9 +1,7 @@
-const re = /XAUUSD (?<type>BUY|SELL)\s+ENTRADA:\s*(?<entry>[\d.]+)\s+SL:\s*(?<sl>[\d.]+)\s+(?<tps>.+)/s
+const re = /XAUUSD (?<type>BUY|SELL)\s+[ENTRADA|entrada]+:\s*(?<entry>[\d.]+)\s+SL:\s*(?<sl>[\d.]+)\s+(?<tps>.+)/s
 
-/** @name parseMessageSignal */
 /**
- *
- * This is a parser of signals in the format:
+ * Parse signals in the format:
  *
  *   XAUUSD BUY
  *   ENTRADA: 1806
@@ -21,7 +19,6 @@ const re = /XAUUSD (?<type>BUY|SELL)\s+ENTRADA:\s*(?<entry>[\d.]+)\s+SL:\s*(?<sl
  */
 export default function parseMessageSignal (text: string): any {
   const message = text || ''
-  const m: any = message.match(re)?.groups || ''
   const symbol = 'GOLD'
   const volume = 0.01
 
@@ -30,6 +27,7 @@ export default function parseMessageSignal (text: string): any {
     return +tpMatch[0]
   }
 
+  const m: any = message.match(re)?.groups || ''
   const tps = m.tps.split('\n').map(tpLabelMap).filter(Boolean)
   const signal = Object.assign( { symbol, volume }, m, { tps } )
   return signal
