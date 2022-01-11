@@ -2,11 +2,11 @@
 <a href="#k1ngbot" id="k1ngbot" style="color: inherit; text-decoration: none;">
   <h1>K1NGBOT</h1>
 </a>
-<p>The bot is a NodeJS command line application that has the ability to open a 
-multi-order position on XTB&#39;s XStation 5 appliance. It can listen for Telegram 
+<p>The bot is a NodeJS command line application that has the ability to open a
+multi-order position on XTB&#39;s XStation 5 appliance. It can listen for Telegram
 messages, open orders on XTB and monitor trade events via a websocket connection.</p>
-<p>There is NO storage that keeps track of meta-data about orders.  When a trade 
-event happens (close, for example do to take-profit) we only know about that 
+<p>There is NO storage that keeps track of meta-data about orders.  When a trade
+event happens (close, for example, due to take-profit) we only know about that
 specific trade which may be part of a multi-order position:</p>
 <pre><code><span class="hl-0">symbol</span><span class="hl-1">: </span><span class="hl-2">&#39;BITCOIN&#39;</span><br/><span class="hl-0">open_price</span><span class="hl-1">: </span><span class="hl-3">67458.03</span><br/><span class="hl-0">close_price</span><span class="hl-1">: </span><span class="hl-3">66861.86</span><br/><span class="hl-0">position</span><span class="hl-1">: </span><span class="hl-3">316522733</span><br/><span class="hl-0">comment</span><span class="hl-1">: </span><span class="hl-2">&#39;[T/P]&#39;</span><br/><span class="hl-0">profit</span><span class="hl-1">: </span><span class="hl-3">59.62</span><br/><span class="hl-0">sl</span><span class="hl-1">: </span><span class="hl-3">67206.15</span><br/><span class="hl-0">tp</span><span class="hl-1">: </span><span class="hl-3">66863.15</span><br/><span class="hl-0">volume</span><span class="hl-1">: </span><span class="hl-3">0.1</span>
 </code></pre>
@@ -18,7 +18,7 @@ trade event information that the server sends.</p>
   <h2>Stop Loss</h2>
 </a>
 <p>Once the bot is listening for trades it will spot orders closed because of <em>take
-profit</em> which will signal him to adjust the stop loss for all remaining orders in 
+profit</em> which will signal him to adjust the stop loss for all remaining orders in
 the &quot;family&quot;.</p>
 <p><em>A family is a group of orders all with the exact same stop loss.</em></p>
 
@@ -54,7 +54,7 @@ in the family, perhaps sadly; but, don&#39;t get emotional.</p>
 </a>
 <p>xAPI <a href="http://developers.xstore.pro/documentation/">http://developers.xstore.pro/documentation/</a></p>
 <p>xapi-node <a href="https://github.com/peterszombati/xapi-node#readme">https://github.com/peterszombati/xapi-node#readme</a></p>
-<p>Telegram </p>
+<p>Telegram</p>
 <ul>
 <li><a href="https://github.com/gram-js/gramjs#readme">https://github.com/gram-js/gramjs#readme</a></li>
 <li><a href="https://painor.gitbook.io/gramjs/">https://painor.gitbook.io/gramjs/</a></li>
