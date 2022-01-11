@@ -1,11 +1,11 @@
 # K1NGBOT
 
-The bot is a NodeJS command line application that has the ability to open a 
-multi-order position on XTB's XStation 5 appliance. It can listen for Telegram 
+The bot is a NodeJS command line application that has the ability to open a
+multi-order position on XTB's XStation 5 appliance. It can listen for Telegram
 messages, open orders on XTB and monitor trade events via a websocket connection.
 
-There is NO storage that keeps track of meta-data about orders.  When a trade 
-event happens (close, for example do to take-profit) we only know about that 
+There is NO storage that keeps track of meta-data about orders.  When a trade
+event happens (close, for example, due to take-profit) we only know about that
 specific trade which may be part of a multi-order position:
 
     symbol: 'BITCOIN'
@@ -25,7 +25,7 @@ trade event information that the server sends.
 ## Stop Loss
 
 Once the bot is listening for trades it will spot orders closed because of _take
-profit_ which will signal him to adjust the stop loss for all remaining orders in 
+profit_ which will signal him to adjust the stop loss for all remaining orders in
 the "family".
 
 _A family is a group of orders all with the exact same stop loss._
@@ -83,7 +83,7 @@ xAPI <http://developers.xstore.pro/documentation/>
 
 xapi-node <https://github.com/peterszombati/xapi-node#readme>
 
-Telegram 
+Telegram
 * <https://github.com/gram-js/gramjs#readme>
 * <https://painor.gitbook.io/gramjs/>
 * <https://gram.js.org/>
